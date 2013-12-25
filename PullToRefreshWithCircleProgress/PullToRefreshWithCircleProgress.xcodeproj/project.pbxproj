@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AC084F95186AB40000193390 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC084F94186AB40000193390 /* Foundation.framework */; };
+		AC084F97186AB40000193390 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC084F96186AB40000193390 /* CoreGraphics.framework */; };
+		AC084F99186AB40000193390 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC084F98186AB40000193390 /* UIKit.framework */; };
+		AC084F9F186AB40000193390 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC084F9D186AB40000193390 /* InfoPlist.strings */; };
+		AC084FA1186AB40000193390 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FA0186AB40000193390 /* main.m */; };
+		AC084FA5186AB40000193390 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FA4186AB40000193390 /* AppDelegate.m */; };
+		AC084FA7186AB40000193390 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC084FA6186AB40000193390 /* Images.xcassets */; };
+		AC084FAE186AB40000193390 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC084FAD186AB40000193390 /* XCTest.framework */; };
+		AC084FAF186AB40000193390 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC084F94186AB40000193390 /* Foundation.framework */; };
+		AC084FB0186AB40000193390 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC084F98186AB40000193390 /* UIKit.framework */; };
+		AC084FB8186AB40000193390 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC084FB6186AB40000193390 /* InfoPlist.strings */; };
+		AC084FBA186AB40000193390 /* PullToRefreshWithCircleProgressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FB9186AB40000193390 /* PullToRefreshWithCircleProgressTests.m */; };
+		AC084FC6186AB46700193390 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FC4186AB46700193390 /* RootViewController.m */; };
+		AC084FC7186AB46700193390 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC084FC5186AB46700193390 /* RootViewController.xib */; };
+		AC084FCE186AB4CE00193390 /* centerIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC084FC9186AB4CE00193390 /* centerIcon@2x.png */; };
+		AC084FCF186AB4CE00193390 /* UIScrollView+UzysCircularProgressPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FCB186AB4CE00193390 /* UIScrollView+UzysCircularProgressPullToRefresh.m */; };
+		AC084FD0186AB4CE00193390 /* UzysRadialProgressActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FCD186AB4CE00193390 /* UzysRadialProgressActivityIndicator.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AC084FB1186AB40000193390 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC084F89186AB40000193390 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC084F90186AB40000193390;
+			remoteInfo = PullToRefreshWithCircleProgress;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AC084F91186AB40000193390 /* PullToRefreshWithCircleProgress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PullToRefreshWithCircleProgress.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC084F94186AB40000193390 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AC084F96186AB40000193390 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AC084F98186AB40000193390 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AC084F9C186AB40000193390 /* PullToRefreshWithCircleProgress-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PullToRefreshWithCircleProgress-Info.plist"; sourceTree = "<group>"; };
+		AC084F9E186AB40000193390 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AC084FA0186AB40000193390 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AC084FA2186AB40000193390 /* PullToRefreshWithCircleProgress-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PullToRefreshWithCircleProgress-Prefix.pch"; sourceTree = "<group>"; };
+		AC084FA3186AB40000193390 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AC084FA4186AB40000193390 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AC084FA6186AB40000193390 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AC084FAC186AB40000193390 /* PullToRefreshWithCircleProgressTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PullToRefreshWithCircleProgressTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC084FAD186AB40000193390 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		AC084FB5186AB40000193390 /* PullToRefreshWithCircleProgressTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PullToRefreshWithCircleProgressTests-Info.plist"; sourceTree = "<group>"; };
+		AC084FB7186AB40000193390 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AC084FB9186AB40000193390 /* PullToRefreshWithCircleProgressTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshWithCircleProgressTests.m; sourceTree = "<group>"; };
+		AC084FC3186AB46700193390 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		AC084FC4186AB46700193390 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		AC084FC5186AB46700193390 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		AC084FC9186AB4CE00193390 /* centerIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "centerIcon@2x.png"; sourceTree = "<group>"; };
+		AC084FCA186AB4CE00193390 /* UIScrollView+UzysCircularProgressPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+UzysCircularProgressPullToRefresh.h"; sourceTree = "<group>"; };
+		AC084FCB186AB4CE00193390 /* UIScrollView+UzysCircularProgressPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+UzysCircularProgressPullToRefresh.m"; sourceTree = "<group>"; };
+		AC084FCC186AB4CE00193390 /* UzysRadialProgressActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysRadialProgressActivityIndicator.h; sourceTree = "<group>"; };
+		AC084FCD186AB4CE00193390 /* UzysRadialProgressActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysRadialProgressActivityIndicator.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC084F8E186AB40000193390 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC084F97186AB40000193390 /* CoreGraphics.framework in Frameworks */,
+				AC084F99186AB40000193390 /* UIKit.framework in Frameworks */,
+				AC084F95186AB40000193390 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC084FA9186AB40000193390 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC084FAE186AB40000193390 /* XCTest.framework in Frameworks */,
+				AC084FB0186AB40000193390 /* UIKit.framework in Frameworks */,
+				AC084FAF186AB40000193390 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AC084F88186AB40000193390 = {
+			isa = PBXGroup;
+			children = (
+				AC084F9A186AB40000193390 /* PullToRefreshWithCircleProgress */,
+				AC084FB3186AB40000193390 /* PullToRefreshWithCircleProgressTests */,
+				AC084F93186AB40000193390 /* Frameworks */,
+				AC084F92186AB40000193390 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AC084F92186AB40000193390 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC084F91186AB40000193390 /* PullToRefreshWithCircleProgress.app */,
+				AC084FAC186AB40000193390 /* PullToRefreshWithCircleProgressTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AC084F93186AB40000193390 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AC084F94186AB40000193390 /* Foundation.framework */,
+				AC084F96186AB40000193390 /* CoreGraphics.framework */,
+				AC084F98186AB40000193390 /* UIKit.framework */,
+				AC084FAD186AB40000193390 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AC084F9A186AB40000193390 /* PullToRefreshWithCircleProgress */ = {
+			isa = PBXGroup;
+			children = (
+				AC084FC8186AB4CE00193390 /* Library */,
+				AC084FA3186AB40000193390 /* AppDelegate.h */,
+				AC084FA4186AB40000193390 /* AppDelegate.m */,
+				AC084FC3186AB46700193390 /* RootViewController.h */,
+				AC084FC4186AB46700193390 /* RootViewController.m */,
+				AC084FC5186AB46700193390 /* RootViewController.xib */,
+				AC084FA6186AB40000193390 /* Images.xcassets */,
+				AC084F9B186AB40000193390 /* Supporting Files */,
+			);
+			path = PullToRefreshWithCircleProgress;
+			sourceTree = "<group>";
+		};
+		AC084F9B186AB40000193390 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AC084F9C186AB40000193390 /* PullToRefreshWithCircleProgress-Info.plist */,
+				AC084F9D186AB40000193390 /* InfoPlist.strings */,
+				AC084FA0186AB40000193390 /* main.m */,
+				AC084FA2186AB40000193390 /* PullToRefreshWithCircleProgress-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AC084FB3186AB40000193390 /* PullToRefreshWithCircleProgressTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC084FB9186AB40000193390 /* PullToRefreshWithCircleProgressTests.m */,
+				AC084FB4186AB40000193390 /* Supporting Files */,
+			);
+			path = PullToRefreshWithCircleProgressTests;
+			sourceTree = "<group>";
+		};
+		AC084FB4186AB40000193390 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AC084FB5186AB40000193390 /* PullToRefreshWithCircleProgressTests-Info.plist */,
+				AC084FB6186AB40000193390 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AC084FC8186AB4CE00193390 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				AC084FC9186AB4CE00193390 /* centerIcon@2x.png */,
+				AC084FCA186AB4CE00193390 /* UIScrollView+UzysCircularProgressPullToRefresh.h */,
+				AC084FCB186AB4CE00193390 /* UIScrollView+UzysCircularProgressPullToRefresh.m */,
+				AC084FCC186AB4CE00193390 /* UzysRadialProgressActivityIndicator.h */,
+				AC084FCD186AB4CE00193390 /* UzysRadialProgressActivityIndicator.m */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AC084F90186AB40000193390 /* PullToRefreshWithCircleProgress */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC084FBD186AB40000193390 /* Build configuration list for PBXNativeTarget "PullToRefreshWithCircleProgress" */;
+			buildPhases = (
+				AC084F8D186AB40000193390 /* Sources */,
+				AC084F8E186AB40000193390 /* Frameworks */,
+				AC084F8F186AB40000193390 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PullToRefreshWithCircleProgress;
+			productName = PullToRefreshWithCircleProgress;
+			productReference = AC084F91186AB40000193390 /* PullToRefreshWithCircleProgress.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AC084FAB186AB40000193390 /* PullToRefreshWithCircleProgressTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC084FC0186AB40000193390 /* Build configuration list for PBXNativeTarget "PullToRefreshWithCircleProgressTests" */;
+			buildPhases = (
+				AC084FA8186AB40000193390 /* Sources */,
+				AC084FA9186AB40000193390 /* Frameworks */,
+				AC084FAA186AB40000193390 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC084FB2186AB40000193390 /* PBXTargetDependency */,
+			);
+			name = PullToRefreshWithCircleProgressTests;
+			productName = PullToRefreshWithCircleProgressTests;
+			productReference = AC084FAC186AB40000193390 /* PullToRefreshWithCircleProgressTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AC084F89186AB40000193390 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Yang152412;
+				TargetAttributes = {
+					AC084FAB186AB40000193390 = {
+						TestTargetID = AC084F90186AB40000193390;
+					};
+				};
+			};
+			buildConfigurationList = AC084F8C186AB40000193390 /* Build configuration list for PBXProject "PullToRefreshWithCircleProgress" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AC084F88186AB40000193390;
+			productRefGroup = AC084F92186AB40000193390 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC084F90186AB40000193390 /* PullToRefreshWithCircleProgress */,
+				AC084FAB186AB40000193390 /* PullToRefreshWithCircleProgressTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AC084F8F186AB40000193390 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC084FCE186AB4CE00193390 /* centerIcon@2x.png in Resources */,
+				AC084F9F186AB40000193390 /* InfoPlist.strings in Resources */,
+				AC084FA7186AB40000193390 /* Images.xcassets in Resources */,
+				AC084FC7186AB46700193390 /* RootViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC084FAA186AB40000193390 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC084FB8186AB40000193390 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC084F8D186AB40000193390 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC084FD0186AB4CE00193390 /* UzysRadialProgressActivityIndicator.m in Sources */,
+				AC084FA5186AB40000193390 /* AppDelegate.m in Sources */,
+				AC084FA1186AB40000193390 /* main.m in Sources */,
+				AC084FCF186AB4CE00193390 /* UIScrollView+UzysCircularProgressPullToRefresh.m in Sources */,
+				AC084FC6186AB46700193390 /* RootViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC084FA8186AB40000193390 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC084FBA186AB40000193390 /* PullToRefreshWithCircleProgressTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC084FB2186AB40000193390 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC084F90186AB40000193390 /* PullToRefreshWithCircleProgress */;
+			targetProxy = AC084FB1186AB40000193390 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AC084F9D186AB40000193390 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC084F9E186AB40000193390 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AC084FB6186AB40000193390 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC084FB7186AB40000193390 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AC084FBB186AB40000193390 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AC084FBC186AB40000193390 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AC084FBE186AB40000193390 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PullToRefreshWithCircleProgress/PullToRefreshWithCircleProgress-Prefix.pch";
+				INFOPLIST_FILE = "PullToRefreshWithCircleProgress/PullToRefreshWithCircleProgress-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AC084FBF186AB40000193390 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PullToRefreshWithCircleProgress/PullToRefreshWithCircleProgress-Prefix.pch";
+				INFOPLIST_FILE = "PullToRefreshWithCircleProgress/PullToRefreshWithCircleProgress-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		AC084FC1186AB40000193390 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PullToRefreshWithCircleProgress.app/PullToRefreshWithCircleProgress";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PullToRefreshWithCircleProgress/PullToRefreshWithCircleProgress-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PullToRefreshWithCircleProgressTests/PullToRefreshWithCircleProgressTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		AC084FC2186AB40000193390 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PullToRefreshWithCircleProgress.app/PullToRefreshWithCircleProgress";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PullToRefreshWithCircleProgress/PullToRefreshWithCircleProgress-Prefix.pch";
+				INFOPLIST_FILE = "PullToRefreshWithCircleProgressTests/PullToRefreshWithCircleProgressTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AC084F8C186AB40000193390 /* Build configuration list for PBXProject "PullToRefreshWithCircleProgress" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC084FBB186AB40000193390 /* Debug */,
+				AC084FBC186AB40000193390 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC084FBD186AB40000193390 /* Build configuration list for PBXNativeTarget "PullToRefreshWithCircleProgress" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC084FBE186AB40000193390 /* Debug */,
+				AC084FBF186AB40000193390 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AC084FC0186AB40000193390 /* Build configuration list for PBXNativeTarget "PullToRefreshWithCircleProgressTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC084FC1186AB40000193390 /* Debug */,
+				AC084FC2186AB40000193390 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AC084F89186AB40000193390 /* Project object */;
+}
