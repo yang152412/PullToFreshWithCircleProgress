@@ -155,8 +155,8 @@
     
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithArcCenter:center
                                                               radius:(self.bounds.size.width/2 - self.borderWidth)
-                                                          startAngle:DEGREES_TO_RADIANS(20)
-                                                            endAngle:DEGREES_TO_RADIANS(360)
+                                                          startAngle:DEGREES_TO_RADIANS(-60)
+                                                            endAngle:DEGREES_TO_RADIANS(-80)
                                                            clockwise:YES];
 
     self.shapeLayer.path = bezierPath.CGPath;
@@ -201,7 +201,7 @@
     // 不需要修改透明度
 //    self.alpha = 1.0 * progress;
     NSLog(@" \n progress == %g \n ",progress);
-    if (progress >= 0 && progress <=1.0) {
+    if (progress >= 0 && progress <=1.0 && self.state != UZYSPullToRefreshStateLoading) {
         //rotation Animation
 //        CABasicAnimation *animationImage = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
 //        animationImage.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(180-180*prevProgress)];
@@ -221,6 +221,7 @@
         animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         [self.shapeLayer addAnimation:animation forKey:@"animation"];
         
+        NSLog(@" \n animation.fromValue == %@ animation.toValue == %@ \n ",animation.fromValue,animation.toValue);
     }
     _progress = progress;
     prevProgress = progress;
@@ -265,14 +266,14 @@
     CGFloat yOffset = contentOffset.y;
     self.progress = ((yOffset+ self.originalTopInset)/-PulltoRefreshThreshold);
     
-    self.center = CGPointMake(self.center.x, (contentOffset.y+ self.originalTopInset)/2);
+//    self.center = CGPointMake(self.center.x, (contentOffset.y+ self.originalTopInset)/2);
     switch (_state) {
         case UZYSPullToRefreshStateStopped: //finish
-//            NSLog(@"Stoped");
+            NSLog(@"Stoped");
             break;
         case UZYSPullToRefreshStateNone: //detect action
         {
-//            NSLog(@"None");
+            NSLog(@"None");
             if(self.scrollView.isDragging && yOffset <0 )
             {
                 self.state = UZYSPullToRefreshStateTriggering;
@@ -280,20 +281,20 @@
         }
         case UZYSPullToRefreshStateTriggering: //progress
         {
-//            NSLog(@"trigering");
+            NSLog(@"trigering");
                 if(self.progress >= 1.0)
                     self.state = UZYSPullToRefreshStateTriggered;
         }
             break;
         case UZYSPullToRefreshStateTriggered: //fire actionhandler
-//            NSLog(@"trigered");
-            if(self.scrollView.dragging == NO && prevProgress > 0.99)
+            NSLog(@"trigered");
+            if(self.scrollView.dragging == NO && prevProgress >=1 )
             {
                 [self actionTriggeredState];
             }
             break;
         case UZYSPullToRefreshStateLoading: //wait until stopIndicatorAnimation
-//            NSLog(@"loading");
+            NSLog(@"loading");
             break;
         default:
             break;
@@ -305,15 +306,17 @@
 -(void)actionStopState
 {
     self.state = UZYSPullToRefreshStateNone;
-    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
-    } completion:^(BOOL finished) {
-        [self stopIndeterminateAnimation];
-        [self resetScrollViewContentInset:^{
-//            [self setLayerHidden:NO];
-//            [self setLayerOpacity:1.0];
-        }];
-
+    [self stopIndeterminateAnimation];
+    [self resetScrollViewContentInset:^{
+        //            [self setLayerHidden:NO];
+        //            [self setLayerOpacity:1.0];
     }];
+    
+//    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
+//    } completion:^(BOOL finished) {
+//        
+//
+//    }];
 }
 -(void)actionTriggeredState
 {
@@ -327,8 +330,9 @@
     
     [self startIndeterminateAnimation];
     [self setupScrollViewContentInsetForLoadingIndicator:nil];
-    if(self.pullToRefreshHandler)
+    if(self.pullToRefreshHandler) {
         self.pullToRefreshHandler();
+    }
 }
 
 #pragma mark - public method
@@ -401,20 +405,20 @@
 {
 //    [self.shapeLayer removeAllAnimations];
     [self.shapeLayer removeAnimationForKey:@"animation"];
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
-    
-//    self.backgroundLayer.hidden = YES;
-    
-    self.shapeLayer.lineWidth = self.borderWidth;
-    self.shapeLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
-                                                          radius:(self.bounds.size.width/2 - self.borderWidth)
-                                                      startAngle:DEGREES_TO_RADIANS(0)
-                                                        endAngle:DEGREES_TO_RADIANS(20)
-                                                       clockwise:YES].CGPath;
-    self.shapeLayer.strokeEnd = 1;
-    
-    [CATransaction commit];
+//    [CATransaction begin];
+//    [CATransaction setDisableActions:YES];
+//    
+////    self.backgroundLayer.hidden = YES;
+//    
+//    self.shapeLayer.lineWidth = self.borderWidth;
+//    self.shapeLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
+//                                                          radius:(self.bounds.size.width/2 - self.borderWidth)
+//                                                      startAngle:DEGREES_TO_RADIANS(0)
+//                                                        endAngle:DEGREES_TO_RADIANS(20)
+//                                                       clockwise:YES].CGPath;
+//    self.shapeLayer.strokeEnd = 1;
+//    
+//    [CATransaction commit];
     
     CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
