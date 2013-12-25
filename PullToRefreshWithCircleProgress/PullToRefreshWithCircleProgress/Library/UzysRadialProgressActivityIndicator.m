@@ -11,7 +11,7 @@
 #define DEGREES_TO_RADIANS(x) (x)/180.0*M_PI
 #define RADIANS_TO_DEGREES(x) (x)/M_PI*180.0
 
-#define PulltoRefreshThreshold 100.0
+#define PulltoRefreshThreshold 60.0
 
 #define ActivityIndicatorDefaultSize CGSizeMake(28, 28)
 
@@ -28,7 +28,7 @@
     self = [super init];
     if(self) {
         self.outlineWidth=2.0f;
-        self.tintColor = [UIColor colorWithWhite:0.4 alpha:0.9];
+        self.tintColor = [UIColor colorWithWhite:1.0 alpha:1.0];
         self.contentsScale = [UIScreen mainScreen].scale;
         [self setNeedsDisplay];
     }
@@ -39,7 +39,7 @@
     self = [super init];
     if(self) {
         self.outlineWidth=width;
-        self.tintColor = [UIColor colorWithWhite:0.4 alpha:0.9];
+        self.tintColor = [UIColor colorWithWhite:1.0 alpha:1.0];
         self.contentsScale = [UIScreen mainScreen].scale;
         [self setNeedsDisplay];
     }
@@ -71,10 +71,9 @@
 
 /*-----------------------------------------------------------------*/
 @interface UzysRadialProgressActivityIndicator()
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;  //Loading Indicator
 @property (nonatomic, strong) UzysRadialProgressActivityIndicatorBackgroundLayer *backgroundLayer;
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
-@property (nonatomic, strong) CALayer *imageLayer;
+//@property (nonatomic, strong) CALayer *imageLayer;
 @property (nonatomic, assign) double progress;
 
 @end
@@ -82,7 +81,7 @@
 
 - (id)init
 {
-    self = [super initWithFrame:CGRectMake(0, -PulltoRefreshThreshold, 25, 25)];
+    self = [super initWithFrame:CGRectMake(0, -PulltoRefreshThreshold, 28, 28)];
     if(self) {
         [self _commonInit];
     }
@@ -90,7 +89,7 @@
 }
 - (id)initWithImage:(UIImage *)image
 {
-    self = [super initWithFrame:CGRectMake(0, -PulltoRefreshThreshold, 25, 25)];
+    self = [super initWithFrame:CGRectMake(0, -PulltoRefreshThreshold, 28, 28)];
     if(self) {
         self.imageIcon =image;
         [self _commonInit];
@@ -101,15 +100,11 @@
 - (void)_commonInit
 {
     self.borderColor = [UIColor colorWithRed:203/255.0 green:32/255.0 blue:39/255.0 alpha:1];
-    self.borderWidth = 2.0f;
+    self.borderWidth = 1.0f;
     self.contentMode = UIViewContentModeRedraw;
     self.state = UZYSPullToRefreshStateNone;
     self.backgroundColor = [UIColor clearColor];
     //init actitvity indicator
-    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _activityIndicatorView.hidesWhenStopped = YES;
-    _activityIndicatorView.frame = self.bounds;
-    [self addSubview:_activityIndicatorView];
     
     //init background layer
     UzysRadialProgressActivityIndicatorBackgroundLayer *backgroundLayer = [[UzysRadialProgressActivityIndicatorBackgroundLayer alloc] initWithBorderWidth:self.borderWidth];
@@ -136,16 +131,17 @@
     shapeLayer.frame = self.bounds;
     shapeLayer.fillColor = nil;
     shapeLayer.strokeColor = self.borderColor.CGColor;
-    shapeLayer.strokeEnd = 0;
-    shapeLayer.shadowColor = [UIColor colorWithWhite:1 alpha:0.8].CGColor;
-    shapeLayer.shadowOpacity = 0.7;
-    shapeLayer.shadowRadius = 20;
+    shapeLayer.strokeEnd = 1;
+//    shapeLayer.shadowColor = [UIColor colorWithWhite:1 alpha:0.8].CGColor;
+//    shapeLayer.shadowOpacity = 0.7;
+//    shapeLayer.shadowRadius = 20;
     shapeLayer.contentsScale = [UIScreen mainScreen].scale;
     shapeLayer.lineWidth = self.borderWidth;
-    shapeLayer.lineCap = kCALineCapRound;
+//    shapeLayer.lineCap = kCALineCapRound;
     
     [self.layer addSublayer:shapeLayer];
     self.shapeLayer = shapeLayer;
+    
 }
 
 - (void)layoutSubviews{
@@ -157,7 +153,11 @@
 - (void)updatePath {
     CGPoint center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithArcCenter:center radius:(self.bounds.size.width/2 - self.borderWidth)  startAngle:M_PI - DEGREES_TO_RADIANS(-90) endAngle:M_PI -DEGREES_TO_RADIANS(360-90) clockwise:NO];
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithArcCenter:center
+                                                              radius:(self.bounds.size.width/2 - self.borderWidth)
+                                                          startAngle:DEGREES_TO_RADIANS(20)
+                                                            endAngle:DEGREES_TO_RADIANS(360)
+                                                           clockwise:YES];
 
     self.shapeLayer.path = bezierPath.CGPath;
 }
@@ -198,9 +198,9 @@
     {
         progress = 1.0;
     }
-    
-    self.alpha = 1.0 * progress;
-
+    // 不需要修改透明度
+//    self.alpha = 1.0 * progress;
+    NSLog(@" \n progress == %g \n ",progress);
     if (progress >= 0 && progress <=1.0) {
         //rotation Animation
 //        CABasicAnimation *animationImage = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
@@ -219,7 +219,6 @@
         animation.removedOnCompletion = NO;
         animation.fillMode = kCAFillModeForwards;
         animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-//        [self.shapeLayer removeAllAnimations];
         [self.shapeLayer addAnimation:animation forKey:@"animation"];
         
     }
@@ -307,13 +306,11 @@
 {
     self.state = UZYSPullToRefreshStateNone;
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
-        self.activityIndicatorView.transform = CGAffineTransformMakeScale(0.1, 0.1);
     } completion:^(BOOL finished) {
-        self.activityIndicatorView.transform = CGAffineTransformIdentity;
-        [self.activityIndicatorView stopAnimating];
+        [self stopIndeterminateAnimation];
         [self resetScrollViewContentInset:^{
-            [self setLayerHidden:NO];
-            [self setLayerOpacity:1.0];
+//            [self setLayerHidden:NO];
+//            [self setLayerOpacity:1.0];
         }];
 
     }];
@@ -323,12 +320,12 @@
     self.state = UZYSPullToRefreshStateLoading;
     
     [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
-        [self setLayerOpacity:0.0];
+//        [self setLayerOpacity:0.0];
     } completion:^(BOOL finished) {
-        [self setLayerHidden:YES];
+//        [self setLayerHidden:YES];
     }];
-
-    [self.activityIndicatorView startAnimating];
+    
+    [self startIndeterminateAnimation];
     [self setupScrollViewContentInsetForLoadingIndicator:nil];
     if(self.pullToRefreshHandler)
         self.pullToRefreshHandler();
@@ -341,7 +338,7 @@
 }
 - (void)manuallyTriggered
 {
-    [self setLayerOpacity:0.0];
+//    [self setLayerOpacity:0.0];
 
     UIEdgeInsets currentInsets = self.scrollView.contentInset;
     currentInsets.top = self.originalTopInset + self.bounds.size.height + 20.0;
@@ -358,7 +355,6 @@
 
     self.frame=rect;
     self.shapeLayer.frame = self.bounds;
-    self.activityIndicatorView.frame = self.bounds;
 //    self.imageLayer.frame = CGRectInset(self.bounds, self.borderWidth, self.borderWidth);
     
     self.backgroundLayer.frame = self.bounds;
@@ -392,4 +388,51 @@
     _borderColor = borderColor;
     _shapeLayer.strokeColor = _borderColor.CGColor;
 }
+
+#pragma mark - Other methods
+
+//- (void)tintColorDidChange
+//{
+//    self.backgroundLayer.tintColor = self.progressTintColor;
+//    self.shapeLayer.strokeColor = self.progressTintColor.CGColor;
+//}
+
+- (void)startIndeterminateAnimation
+{
+//    [self.shapeLayer removeAllAnimations];
+    [self.shapeLayer removeAnimationForKey:@"animation"];
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    
+//    self.backgroundLayer.hidden = YES;
+    
+    self.shapeLayer.lineWidth = self.borderWidth;
+    self.shapeLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
+                                                          radius:(self.bounds.size.width/2 - self.borderWidth)
+                                                      startAngle:DEGREES_TO_RADIANS(0)
+                                                        endAngle:DEGREES_TO_RADIANS(20)
+                                                       clockwise:YES].CGPath;
+    self.shapeLayer.strokeEnd = 1;
+    
+    [CATransaction commit];
+    
+    CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
+    rotationAnimation.toValue = [NSNumber numberWithFloat:2*M_PI];
+    rotationAnimation.duration = 1.0;
+    rotationAnimation.repeatCount = HUGE_VALF;
+    
+    [self.shapeLayer addAnimation:rotationAnimation forKey:@"indeterminateAnimation"];
+}
+
+- (void)stopIndeterminateAnimation
+{
+    [self.shapeLayer removeAnimationForKey:@"indeterminateAnimation"];
+    
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    self.backgroundLayer.hidden = NO;
+    [CATransaction commit];
+}
+
 @end

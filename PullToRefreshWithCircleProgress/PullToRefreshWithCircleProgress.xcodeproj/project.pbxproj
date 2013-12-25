@@ -477,6 +477,7 @@
 				AC084FBF186AB40000193390 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AC084FC0186AB40000193390 /* Build configuration list for PBXNativeTarget "PullToRefreshWithCircleProgressTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +486,7 @@
 				AC084FC2186AB40000193390 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

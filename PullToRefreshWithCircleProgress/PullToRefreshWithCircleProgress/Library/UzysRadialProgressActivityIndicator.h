@@ -36,4 +36,8 @@ typedef NS_ENUM(NSUInteger, UZYSPullToRefreshState) {
 - (id)initWithImage:(UIImage *)image;
 - (void)setSize:(CGSize) size;
 
+// On iOS 7, progressTintColor sets and gets the tintColor property, and therefore defaults to the value of tintColor
+// On iOS 6, defaults to [UIColor blackColor]
+//@property (nonatomic, strong) UIColor *progressTintColor;
+
 @end

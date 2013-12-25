@@ -66,7 +66,7 @@
 {
     [super viewDidAppear:animated];
     //manually triggered pulltorefresh
-//    [_tableView triggerPullToRefresh];
+    [_tableView triggerPullToRefresh];
 }
 
 #pragma mark UITableView DataManagement
