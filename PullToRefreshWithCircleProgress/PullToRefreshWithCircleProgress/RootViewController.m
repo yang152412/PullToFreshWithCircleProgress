@@ -7,7 +7,7 @@
 //
 
 #import "RootViewController.h"
-#import "UIScrollView+UzysCircularProgressPullToRefresh.h"
+#import "UITableView+UzysCircularProgressPullToRefresh.h"
 #define CELLIDENTIFIER @"CELL"
 
 @interface RootViewController ()

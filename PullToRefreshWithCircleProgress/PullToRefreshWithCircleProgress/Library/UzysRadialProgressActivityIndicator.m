@@ -81,7 +81,7 @@
 
 - (id)init
 {
-    self = [super initWithFrame:CGRectMake(0, -PulltoRefreshThreshold, 28, 28)];
+    self = [super initWithFrame:CGRectMake(0, 0, 28, 28)];
     if(self) {
         [self _commonInit];
     }
@@ -89,7 +89,7 @@
 }
 - (id)initWithImage:(UIImage *)image
 {
-    self = [super initWithFrame:CGRectMake(0, -PulltoRefreshThreshold, 28, 28)];
+    self = [super initWithFrame:CGRectMake(0, 0, 28, 28)];
     if(self) {
         self.imageIcon =image;
         [self _commonInit];
@@ -217,7 +217,7 @@
         animation.toValue = [NSNumber numberWithFloat:progress];
         animation.duration = 0.35 + 0.25*(fabs([animation.fromValue doubleValue] - [animation.toValue doubleValue]));
         animation.removedOnCompletion = NO;
-        animation.fillMode = kCAFillModeForwards;
+        animation.fillMode = kCAFillModeBoth;
         animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         [self.shapeLayer addAnimation:animation forKey:@"animation"];
         

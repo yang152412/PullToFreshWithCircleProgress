@@ -6,11 +6,11 @@
 //  Copyright (c) 2013년 Uzysjung. All rights reserved.
 //
 
-#import "UIScrollView+UzysCircularProgressPullToRefresh.h"
+#import "UITableView+UzysCircularProgressPullToRefresh.h"
 #import <objc/runtime.h>
 static char UIScrollViewPullToRefreshView;
 
-@implementation UIScrollView (UzysInteractiveIndicator)
+@implementation UITableView (UzysInteractiveIndicator)
 @dynamic pullToRefreshView, showPullToRefresh;
 
 - (void)addPullToRefreshActionHandler:(actionHandler)handler
@@ -21,11 +21,16 @@ static char UIScrollViewPullToRefreshView;
         UzysRadialProgressActivityIndicator *view = [[UzysRadialProgressActivityIndicator alloc] initWithImage:nil];
         view.pullToRefreshHandler = handler;
         view.scrollView = self;
-        view.frame = CGRectMake((self.bounds.size.width - view.bounds.size.width)/2,
-                                -view.bounds.size.height, view.bounds.size.width, view.bounds.size.height);
+        view.frame = CGRectMake((self.bounds.size.width - view.bounds.size.width)/2-50,10, view.bounds.size.width, view.bounds.size.height);
         view.originalTopInset = self.contentInset.top;
-        [self addSubview:view];
-        [self sendSubviewToBack:view];
+//        [self addSubview:view];
+//        [self sendSubviewToBack:view];
+        
+        UIView *bgView = [[UIView alloc] initWithFrame:self.bounds];
+        bgView.backgroundColor = [UIColor greenColor];
+        [bgView addSubview:view];
+        
+        [self setBackgroundView:bgView];
         self.pullToRefreshView = view;
         self.showPullToRefresh = YES;
     }
