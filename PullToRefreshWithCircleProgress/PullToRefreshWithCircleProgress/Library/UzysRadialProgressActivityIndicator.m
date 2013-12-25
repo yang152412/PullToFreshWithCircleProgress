@@ -13,9 +13,12 @@
 
 #define PulltoRefreshThreshold 100.0
 
+#define ActivityIndicatorDefaultSize CGSizeMake(28, 28)
+
 @interface UzysRadialProgressActivityIndicatorBackgroundLayer : CALayer
 
 @property (nonatomic,assign) CGFloat outlineWidth;
+@property (nonatomic, strong) UIColor *tintColor;
 - (id)initWithBorderWidth:(CGFloat)width;
 
 @end
@@ -25,6 +28,7 @@
     self = [super init];
     if(self) {
         self.outlineWidth=2.0f;
+        self.tintColor = [UIColor colorWithWhite:0.4 alpha:0.9];
         self.contentsScale = [UIScreen mainScreen].scale;
         [self setNeedsDisplay];
     }
@@ -35,6 +39,7 @@
     self = [super init];
     if(self) {
         self.outlineWidth=width;
+        self.tintColor = [UIColor colorWithWhite:0.4 alpha:0.9];
         self.contentsScale = [UIScreen mainScreen].scale;
         [self setNeedsDisplay];
     }
@@ -42,18 +47,24 @@
 }
 - (void)drawInContext:(CGContextRef)ctx
 {
-    //Draw white circle
-    CGContextSetFillColor(ctx, CGColorGetComponents([UIColor colorWithWhite:1.0 alpha:0.8].CGColor));
+    //Draw white circle,白色圆形背景
+    CGContextSetFillColor(ctx, CGColorGetComponents(self.tintColor.CGColor));
     CGContextFillEllipseInRect(ctx,CGRectInset(self.bounds, self.outlineWidth, self.outlineWidth));
 
-    //Draw circle outline
-    CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:0.4 alpha:0.9].CGColor);
+    //Draw circle outline，灰色圆形进度条
+    CGContextSetStrokeColorWithColor(ctx, self.tintColor.CGColor);
     CGContextSetLineWidth(ctx, self.outlineWidth);
     CGContextStrokeEllipseInRect(ctx, CGRectInset(self.bounds, self.outlineWidth , self.outlineWidth ));
 }
 - (void)setOutlineWidth:(CGFloat)outlineWidth
 {
     _outlineWidth = outlineWidth;
+    [self setNeedsDisplay];
+}
+- (void)setTintColor:(UIColor *)tintColor
+{
+    _tintColor = tintColor;
+    
     [self setNeedsDisplay];
 }
 @end
@@ -103,20 +114,22 @@
     //init background layer
     UzysRadialProgressActivityIndicatorBackgroundLayer *backgroundLayer = [[UzysRadialProgressActivityIndicatorBackgroundLayer alloc] initWithBorderWidth:self.borderWidth];
     backgroundLayer.frame = self.bounds;
+    backgroundLayer.tintColor = [UIColor whiteColor];
     [self.layer addSublayer:backgroundLayer];
     self.backgroundLayer = backgroundLayer;
     
-    if(!self.imageIcon)
-        self.imageIcon = [UIImage imageNamed:@"centerIcon"];
+//    if(!self.imageIcon) {
+//        self.imageIcon = [UIImage imageNamed:@"centerIcon"];
+//    }
     
     //init icon layer
-    CALayer *imageLayer = [CALayer layer];
-    imageLayer.contentsScale = [UIScreen mainScreen].scale;
-    imageLayer.frame = CGRectInset(self.bounds, self.borderWidth, self.borderWidth);
-    imageLayer.contents = (id)self.imageIcon.CGImage;
-    [self.layer addSublayer:imageLayer];
-    self.imageLayer = imageLayer;
-    self.imageLayer.transform = CATransform3DMakeRotation(DEGREES_TO_RADIANS(180),0,0,1);
+//    CALayer *imageLayer = [CALayer layer];
+//    imageLayer.contentsScale = [UIScreen mainScreen].scale;
+//    imageLayer.frame = CGRectInset(self.bounds, self.borderWidth, self.borderWidth);
+//    imageLayer.contents = (id)self.imageIcon.CGImage;
+//    [self.layer addSublayer:imageLayer];
+//    self.imageLayer = imageLayer;
+//    self.imageLayer.transform = CATransform3DMakeRotation(DEGREES_TO_RADIANS(180),0,0,1);
 
     //init arc draw layer
     CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
@@ -190,13 +203,13 @@
 
     if (progress >= 0 && progress <=1.0) {
         //rotation Animation
-        CABasicAnimation *animationImage = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-        animationImage.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(180-180*prevProgress)];
-        animationImage.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(180-180*progress)];
-        animationImage.duration = 0.15;
-        animationImage.removedOnCompletion = NO;
-        animationImage.fillMode = kCAFillModeForwards;
-        [self.imageLayer addAnimation:animationImage forKey:@"animation"];
+//        CABasicAnimation *animationImage = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+//        animationImage.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(180-180*prevProgress)];
+//        animationImage.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(180-180*progress)];
+//        animationImage.duration = 0.15;
+//        animationImage.removedOnCompletion = NO;
+//        animationImage.fillMode = kCAFillModeForwards;
+//        [self.imageLayer addAnimation:animationImage forKey:@"animation"];
 
         //strokeAnimation
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
@@ -215,13 +228,13 @@
 }
 -(void)setLayerOpacity:(CGFloat)opacity
 {
-    self.imageLayer.opacity = opacity;
+//    self.imageLayer.opacity = opacity;
     self.backgroundLayer.opacity = opacity;
     self.shapeLayer.opacity = opacity;
 }
 -(void)setLayerHidden:(BOOL)hidden
 {
-    self.imageLayer.hidden = hidden;
+//    self.imageLayer.hidden = hidden;
     self.shapeLayer.hidden = hidden;
     self.backgroundLayer.hidden = hidden;
 }
@@ -346,7 +359,7 @@
     self.frame=rect;
     self.shapeLayer.frame = self.bounds;
     self.activityIndicatorView.frame = self.bounds;
-    self.imageLayer.frame = CGRectInset(self.bounds, self.borderWidth, self.borderWidth);
+//    self.imageLayer.frame = CGRectInset(self.bounds, self.borderWidth, self.borderWidth);
     
     self.backgroundLayer.frame = self.bounds;
     [self.backgroundLayer setNeedsDisplay];
@@ -354,10 +367,14 @@
 - (void)setImageIcon:(UIImage *)imageIcon
 {
     _imageIcon = imageIcon;
-    _imageLayer.contents = (id)_imageIcon.CGImage;
-    _imageLayer.frame = CGRectInset(self.bounds, self.borderWidth, self.borderWidth);
+//    _imageLayer.contents = (id)_imageIcon.CGImage;
+//    _imageLayer.frame = CGRectInset(self.bounds, self.borderWidth, self.borderWidth);
 
-    [self setSize:_imageIcon.size];
+    if (!_imageIcon) {
+        [self setSize:ActivityIndicatorDefaultSize];
+    } else {
+        [self setSize:_imageIcon.size];
+    }
 }
 - (void)setBorderWidth:(CGFloat)borderWidth
 {
@@ -367,7 +384,7 @@
     [_backgroundLayer setNeedsDisplay];
     
     _shapeLayer.lineWidth = _borderWidth;
-    _imageLayer.frame = CGRectInset(self.bounds, self.borderWidth, self.borderWidth);
+//    _imageLayer.frame = CGRectInset(self.bounds, self.borderWidth, self.borderWidth);
 
 }
 - (void)setBorderColor:(UIColor *)borderColor
