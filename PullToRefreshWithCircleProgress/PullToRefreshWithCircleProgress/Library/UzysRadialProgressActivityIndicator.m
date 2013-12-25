@@ -11,8 +11,6 @@
 #define DEGREES_TO_RADIANS(x) (x)/180.0*M_PI
 #define RADIANS_TO_DEGREES(x) (x)/M_PI*180.0
 
-#define PulltoRefreshThreshold 60.0
-
 #define ActivityIndicatorDefaultSize CGSizeMake(28, 28)
 
 @interface UzysRadialProgressActivityIndicatorBackgroundLayer : CALayer
@@ -155,8 +153,8 @@
     
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithArcCenter:center
                                                               radius:(self.bounds.size.width/2 - self.borderWidth)
-                                                          startAngle:DEGREES_TO_RADIANS(-60)
-                                                            endAngle:DEGREES_TO_RADIANS(-80)
+                                                          startAngle:DEGREES_TO_RADIANS(-80)
+                                                            endAngle:DEGREES_TO_RADIANS(-90)
                                                            clockwise:YES];
 
     self.shapeLayer.path = bezierPath.CGPath;
@@ -201,7 +199,7 @@
     // 不需要修改透明度
 //    self.alpha = 1.0 * progress;
     NSLog(@" \n progress == %g \n ",progress);
-    if (progress >= 0 && progress <=1.0 && self.state != UZYSPullToRefreshStateLoading) {
+    if (progress >= 0 && progress <=1.0 && self.state != UZYSPullToRefreshStateLoading && self.state != UZYSPullToRefreshStateStopped) {
         //rotation Animation
 //        CABasicAnimation *animationImage = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
 //        animationImage.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(180-180*prevProgress)];
@@ -264,7 +262,15 @@
 {
     static double prevProgress;
     CGFloat yOffset = contentOffset.y;
-    self.progress = ((yOffset+ self.originalTopInset)/-PulltoRefreshThreshold);
+    NSLog(@" \n yOffset ==  %g",yOffset);
+    if (-yOffset <= self.frame.origin.y) {
+        self.progress = 0;
+    }else if (-(yOffset+ self.originalTopInset + self.frame.origin.y) >= PulltoRefreshThreshold){
+        self.progress = 1;
+    }else {
+        self.progress = (-(yOffset+ self.originalTopInset + self.frame.origin.y)/PulltoRefreshThreshold);
+    }
+    
     
 //    self.center = CGPointMake(self.center.x, (contentOffset.y+ self.originalTopInset)/2);
     switch (_state) {
@@ -345,7 +351,7 @@
 //    [self setLayerOpacity:0.0];
 
     UIEdgeInsets currentInsets = self.scrollView.contentInset;
-    currentInsets.top = self.originalTopInset + self.bounds.size.height + 20.0;
+    currentInsets.top = self.originalTopInset + self.bounds.size.height + 30;
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, -currentInsets.top);
     } completion:^(BOOL finished) {

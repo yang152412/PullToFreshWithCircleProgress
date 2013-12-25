@@ -33,6 +33,12 @@ static char UIScrollViewPullToRefreshView;
         [self setBackgroundView:bgView];
         self.pullToRefreshView = view;
         self.showPullToRefresh = YES;
+        
+        // add a line
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.origin.y + PulltoRefreshThreshold, 320, 1)];
+        line.backgroundColor = [UIColor yellowColor];
+        [bgView addSubview:line];
+        [bgView sendSubviewToBack:line];
     }
 }
 

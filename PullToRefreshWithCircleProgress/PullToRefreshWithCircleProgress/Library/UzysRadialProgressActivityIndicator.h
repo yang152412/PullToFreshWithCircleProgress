@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#define PulltoRefreshThreshold 60.0
+
 typedef void (^actionHandler)(void);
 typedef NS_ENUM(NSUInteger, UZYSPullToRefreshState) {
     UZYSPullToRefreshStateNone =0,
