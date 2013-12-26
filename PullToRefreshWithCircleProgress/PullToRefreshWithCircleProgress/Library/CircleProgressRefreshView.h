@@ -1,21 +1,21 @@
 //
-//  uzysRadialProgressActivityIndicator.h
-//  UzysRadialProgressActivityIndicator
+//  CircleProgressRefreshView.h
+//  CircleProgressRefreshView.h
 //
-//  Created by Uzysjung on 13. 10. 22..
-//  Copyright (c) 2013년 Uzysjung. All rights reserved.
+//  Created by jung on 13. 10. 22..
+//  Copyright (c) 2013년 jung. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #define PulltoRefreshThreshold 60.0
 
 typedef void (^actionHandler)(void);
-typedef NS_ENUM(NSUInteger, UZYSPullToRefreshState) {
-    UZYSPullToRefreshStateNone =0,
-    UZYSPullToRefreshStateStopped,
-    UZYSPullToRefreshStateTriggering,
-    UZYSPullToRefreshStateTriggered,
-    UZYSPullToRefreshStateLoading,
+typedef NS_ENUM(NSUInteger, PullToRefreshState) {
+    PullToRefreshStateNone =0,
+    PullToRefreshStateStopped,
+    PullToRefreshStateTriggering,
+    PullToRefreshStateTriggered,
+    PullToRefreshStateLoading,
     
 };
 
@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, UZYSPullToRefreshState) {
 
 @property (nonatomic,assign) BOOL isObserving;
 @property (nonatomic,assign) CGFloat originalTopInset;
-@property (nonatomic,assign) UZYSPullToRefreshState state;
+@property (nonatomic,assign) PullToRefreshState state;
 @property (nonatomic,weak) UIScrollView *scrollView;
 @property (nonatomic,copy) actionHandler pullToRefreshHandler;
 

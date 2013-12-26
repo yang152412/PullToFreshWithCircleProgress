@@ -1,9 +1,9 @@
 //
-//  uzysRadialProgressActivityIndicator.m
-//  UzysRadialProgressActivityIndicator
+//  CircleProgressRefreshView.m
+//  CircleProgressRefreshView
 //
-//  Created by Uzysjung on 13. 10. 22..
-//  Copyright (c) 2013년 Uzysjung. All rights reserved.
+//  Created by jung on 13. 10. 22..
+//  Copyright (c) 2013년 jung. All rights reserved.
 //
 
 #import "CircleProgressRefreshView.h"
@@ -100,7 +100,7 @@
     self.borderColor = [UIColor colorWithRed:203/255.0 green:32/255.0 blue:39/255.0 alpha:1];
     self.borderWidth = 1.0f;
     self.contentMode = UIViewContentModeRedraw;
-    self.state = UZYSPullToRefreshStateNone;
+    self.state = PullToRefreshStateNone;
     self.backgroundColor = [UIColor clearColor];
     //init actitvity indicator
     
@@ -199,7 +199,7 @@
     // 不需要修改透明度
 //    self.alpha = 1.0 * progress;
     NSLog(@" \n progress == %g \n ",progress);
-    if (progress >= 0 && progress <=1.0 && self.state != UZYSPullToRefreshStateLoading && self.state != UZYSPullToRefreshStateStopped) {
+    if (progress >= 0 && progress <=1.0 && self.state != PullToRefreshStateLoading && self.state != PullToRefreshStateStopped) {
         //rotation Animation
 //        CABasicAnimation *animationImage = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
 //        animationImage.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(180-180*prevProgress)];
@@ -274,32 +274,32 @@
     
 //    self.center = CGPointMake(self.center.x, (contentOffset.y+ self.originalTopInset)/2);
     switch (_state) {
-        case UZYSPullToRefreshStateStopped: //finish
+        case PullToRefreshStateStopped: //finish
             NSLog(@"Stoped");
             break;
-        case UZYSPullToRefreshStateNone: //detect action
+        case PullToRefreshStateNone: //detect action
         {
             NSLog(@"None");
             if(self.scrollView.isDragging && yOffset <0 )
             {
-                self.state = UZYSPullToRefreshStateTriggering;
+                self.state = PullToRefreshStateTriggering;
             }
         }
-        case UZYSPullToRefreshStateTriggering: //progress
+        case PullToRefreshStateTriggering: //progress
         {
             NSLog(@"trigering");
                 if(self.progress >= 1.0)
-                    self.state = UZYSPullToRefreshStateTriggered;
+                    self.state = PullToRefreshStateTriggered;
         }
             break;
-        case UZYSPullToRefreshStateTriggered: //fire actionhandler
+        case PullToRefreshStateTriggered: //fire actionhandler
             NSLog(@"trigered");
             if(self.scrollView.dragging == NO && prevProgress >=1 )
             {
                 [self actionTriggeredState];
             }
             break;
-        case UZYSPullToRefreshStateLoading: //wait until stopIndicatorAnimation
+        case PullToRefreshStateLoading: //wait until stopIndicatorAnimation
             NSLog(@"loading");
             break;
         default:
@@ -311,7 +311,7 @@
 }
 -(void)actionStopState
 {
-    self.state = UZYSPullToRefreshStateNone;
+    self.state = PullToRefreshStateNone;
     [self stopIndeterminateAnimation];
     [self resetScrollViewContentInset:^{
         //            [self setLayerHidden:NO];
@@ -326,7 +326,7 @@
 }
 -(void)actionTriggeredState
 {
-    self.state = UZYSPullToRefreshStateLoading;
+    self.state = PullToRefreshStateLoading;
     
     [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
 //        [self setLayerOpacity:0.0];
