@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, UZYSPullToRefreshState) {
 };
 
 
-@interface UzysRadialProgressActivityIndicator : UIView
+@interface CircleProgressRefreshView : UIView
 
 @property (nonatomic,assign) BOOL isObserving;
 @property (nonatomic,assign) CGFloat originalTopInset;

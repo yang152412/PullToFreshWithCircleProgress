@@ -7,12 +7,12 @@
 //
 
 #import "RootViewController.h"
-#import "UITableView+UzysCircularProgressPullToRefresh.h"
+#import "UITableView+CircularProgressPullToRefresh.h"
 #define CELLIDENTIFIER @"CELL"
 
 @interface RootViewController ()
 
-@property (nonatomic,strong) UzysRadialProgressActivityIndicator *radialIndicator;
+@property (nonatomic,strong) CircleProgressRefreshView *radialIndicator;
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *pData;
 

@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UzysRadialProgressActivityIndicator.h"
+#import "CircleProgressRefreshView.h"
 
-@interface UITableView (UzysInteractiveIndicator)
+@interface UITableView (CircularProgressPullToRefresh)
 @property (nonatomic,assign) BOOL showPullToRefresh;
-@property (nonatomic,strong,readonly) UzysRadialProgressActivityIndicator *pullToRefreshView;
+@property (nonatomic,strong,readonly) CircleProgressRefreshView *pullToRefreshView;
 
 - (void)addPullToRefreshActionHandler:(actionHandler)handler;
 - (void)triggerPullToRefresh;

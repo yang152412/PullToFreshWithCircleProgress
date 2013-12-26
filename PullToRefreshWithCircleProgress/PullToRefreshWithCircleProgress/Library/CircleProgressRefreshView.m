@@ -6,21 +6,21 @@
 //  Copyright (c) 2013년 Uzysjung. All rights reserved.
 //
 
-#import "UzysRadialProgressActivityIndicator.h"
+#import "CircleProgressRefreshView.h"
 
 #define DEGREES_TO_RADIANS(x) (x)/180.0*M_PI
 #define RADIANS_TO_DEGREES(x) (x)/M_PI*180.0
 
 #define ActivityIndicatorDefaultSize CGSizeMake(28, 28)
 
-@interface UzysRadialProgressActivityIndicatorBackgroundLayer : CALayer
+@interface RadialProgressActivityIndicatorBackgroundLayer : CALayer
 
 @property (nonatomic,assign) CGFloat outlineWidth;
 @property (nonatomic, strong) UIColor *tintColor;
 - (id)initWithBorderWidth:(CGFloat)width;
 
 @end
-@implementation UzysRadialProgressActivityIndicatorBackgroundLayer
+@implementation RadialProgressActivityIndicatorBackgroundLayer
 - (id)init
 {
     self = [super init];
@@ -68,14 +68,14 @@
 @end
 
 /*-----------------------------------------------------------------*/
-@interface UzysRadialProgressActivityIndicator()
-@property (nonatomic, strong) UzysRadialProgressActivityIndicatorBackgroundLayer *backgroundLayer;
+@interface CircleProgressRefreshView()
+@property (nonatomic, strong) RadialProgressActivityIndicatorBackgroundLayer *backgroundLayer;
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 //@property (nonatomic, strong) CALayer *imageLayer;
 @property (nonatomic, assign) double progress;
 
 @end
-@implementation UzysRadialProgressActivityIndicator
+@implementation CircleProgressRefreshView
 
 - (id)init
 {
@@ -105,7 +105,7 @@
     //init actitvity indicator
     
     //init background layer
-    UzysRadialProgressActivityIndicatorBackgroundLayer *backgroundLayer = [[UzysRadialProgressActivityIndicatorBackgroundLayer alloc] initWithBorderWidth:self.borderWidth];
+    RadialProgressActivityIndicatorBackgroundLayer *backgroundLayer = [[RadialProgressActivityIndicatorBackgroundLayer alloc] initWithBorderWidth:self.borderWidth];
     backgroundLayer.frame = self.bounds;
     backgroundLayer.tintColor = [UIColor whiteColor];
     [self.layer addSublayer:backgroundLayer];

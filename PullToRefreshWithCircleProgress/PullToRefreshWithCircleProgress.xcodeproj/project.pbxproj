@@ -22,8 +22,8 @@
 		AC084FC6186AB46700193390 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FC4186AB46700193390 /* RootViewController.m */; };
 		AC084FC7186AB46700193390 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC084FC5186AB46700193390 /* RootViewController.xib */; };
 		AC084FCE186AB4CE00193390 /* centerIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC084FC9186AB4CE00193390 /* centerIcon@2x.png */; };
-		AC084FCF186AB4CE00193390 /* UITableViewUzysCircularProgressPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FCB186AB4CE00193390 /* UITableViewUzysCircularProgressPullToRefresh.m */; };
-		AC084FD0186AB4CE00193390 /* UzysRadialProgressActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FCD186AB4CE00193390 /* UzysRadialProgressActivityIndicator.m */; };
+		AC084FCF186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FCB186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.m */; };
+		AC084FD0186AB4CE00193390 /* CircleProgressRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FCD186AB4CE00193390 /* CircleProgressRefreshView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,10 +57,10 @@
 		AC084FC4186AB46700193390 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		AC084FC5186AB46700193390 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		AC084FC9186AB4CE00193390 /* centerIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "centerIcon@2x.png"; sourceTree = "<group>"; };
-		AC084FCA186AB4CE00193390 /* UITableView+UzysCircularProgressPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+UzysCircularProgressPullToRefresh.h"; sourceTree = "<group>"; };
-		AC084FCB186AB4CE00193390 /* UITableViewUzysCircularProgressPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewUzysCircularProgressPullToRefresh.m; sourceTree = "<group>"; };
-		AC084FCC186AB4CE00193390 /* UzysRadialProgressActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysRadialProgressActivityIndicator.h; sourceTree = "<group>"; };
-		AC084FCD186AB4CE00193390 /* UzysRadialProgressActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysRadialProgressActivityIndicator.m; sourceTree = "<group>"; };
+		AC084FCA186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CircularProgressPullToRefresh.h"; sourceTree = "<group>"; };
+		AC084FCB186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CircularProgressPullToRefresh.m"; sourceTree = "<group>"; };
+		AC084FCC186AB4CE00193390 /* CircleProgressRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressRefreshView.h; sourceTree = "<group>"; };
+		AC084FCD186AB4CE00193390 /* CircleProgressRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressRefreshView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,10 +165,10 @@
 			isa = PBXGroup;
 			children = (
 				AC084FC9186AB4CE00193390 /* centerIcon@2x.png */,
-				AC084FCA186AB4CE00193390 /* UITableView+UzysCircularProgressPullToRefresh.h */,
-				AC084FCB186AB4CE00193390 /* UITableViewUzysCircularProgressPullToRefresh.m */,
-				AC084FCC186AB4CE00193390 /* UzysRadialProgressActivityIndicator.h */,
-				AC084FCD186AB4CE00193390 /* UzysRadialProgressActivityIndicator.m */,
+				AC084FCA186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.h */,
+				AC084FCB186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.m */,
+				AC084FCC186AB4CE00193390 /* CircleProgressRefreshView.h */,
+				AC084FCD186AB4CE00193390 /* CircleProgressRefreshView.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -270,10 +270,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC084FD0186AB4CE00193390 /* UzysRadialProgressActivityIndicator.m in Sources */,
+				AC084FD0186AB4CE00193390 /* CircleProgressRefreshView.m in Sources */,
 				AC084FA5186AB40000193390 /* AppDelegate.m in Sources */,
 				AC084FA1186AB40000193390 /* main.m in Sources */,
-				AC084FCF186AB4CE00193390 /* UITableViewUzysCircularProgressPullToRefresh.m in Sources */,
+				AC084FCF186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.m in Sources */,
 				AC084FC6186AB46700193390 /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

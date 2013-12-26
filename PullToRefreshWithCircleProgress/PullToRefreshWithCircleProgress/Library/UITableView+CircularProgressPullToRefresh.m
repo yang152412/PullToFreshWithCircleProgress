@@ -6,11 +6,11 @@
 //  Copyright (c) 2013년 Uzysjung. All rights reserved.
 //
 
-#import "UITableView+UzysCircularProgressPullToRefresh.h"
+#import "UITableView+CircularProgressPullToRefresh.h"
 #import <objc/runtime.h>
 static char UIScrollViewPullToRefreshView;
 
-@implementation UITableView (UzysInteractiveIndicator)
+@implementation UITableView (CircularProgressPullToRefresh)
 @dynamic pullToRefreshView, showPullToRefresh;
 
 - (void)addPullToRefreshActionHandler:(actionHandler)handler
@@ -18,7 +18,7 @@ static char UIScrollViewPullToRefreshView;
     if(self.pullToRefreshView == nil)
     {
 //        UzysRadialProgressActivityIndicator *view = [[UzysRadialProgressActivityIndicator alloc] initWithImage:[UIImage imageNamed:@"centerIcon"]];
-        UzysRadialProgressActivityIndicator *view = [[UzysRadialProgressActivityIndicator alloc] initWithImage:nil];
+        CircleProgressRefreshView *view = [[CircleProgressRefreshView alloc] initWithImage:nil];
         view.pullToRefreshHandler = handler;
         view.scrollView = self;
         view.frame = CGRectMake((self.bounds.size.width - view.bounds.size.width)/2-50,10, view.bounds.size.width, view.bounds.size.height);
@@ -51,13 +51,13 @@ static char UIScrollViewPullToRefreshView;
     [self.pullToRefreshView stopIndicatorAnimation];
 }
 #pragma mark - property
-- (void)setPullToRefreshView:(UzysRadialProgressActivityIndicator *)pullToRefreshView
+- (void)setPullToRefreshView:(CircleProgressRefreshView *)pullToRefreshView
 {
     [self willChangeValueForKey:@"UzysRadialProgressActivityIndicator"];
     objc_setAssociatedObject(self, &UIScrollViewPullToRefreshView, pullToRefreshView, OBJC_ASSOCIATION_ASSIGN);
     [self didChangeValueForKey:@"UzysRadialProgressActivityIndicator"];
 }
-- (UzysRadialProgressActivityIndicator *)pullToRefreshView
+- (CircleProgressRefreshView *)pullToRefreshView
 {
     return objc_getAssociatedObject(self, &UIScrollViewPullToRefreshView);
 }
