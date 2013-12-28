@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EVCircularProgressView.h"
+
 #define PulltoRefreshThreshold 60.0
 
 typedef void (^actionHandler)(void);
 typedef NS_ENUM(NSUInteger, PullToRefreshState) {
-    PullToRefreshStateNone =0,
-    PullToRefreshStateStopped,
-    PullToRefreshStateTriggering,
-    PullToRefreshStateTriggered,
-    PullToRefreshStateLoading,
+//    PullToRefreshStateNone =0,
+//    PullToRefreshStateStopped,
+    PullToRefreshStateNormal, // 正常情况
+    PullToRefreshStateTriggering, // offset 没有达到阈值
+    PullToRefreshStateTriggered, // offset 达到阈值
+    PullToRefreshStateLoading, // 正在加载中
     
 };
 
@@ -24,22 +27,16 @@ typedef NS_ENUM(NSUInteger, PullToRefreshState) {
 
 @property (nonatomic,assign) BOOL isObserving;
 @property (nonatomic,assign) CGFloat originalTopInset;
+
 @property (nonatomic,assign) PullToRefreshState state;
 @property (nonatomic,weak) UIScrollView *scrollView;
 @property (nonatomic,copy) actionHandler pullToRefreshHandler;
 
-@property (nonatomic,strong) UIImage *imageIcon;
+
 @property (nonatomic,strong) UIColor *borderColor;
 @property (nonatomic,assign) CGFloat borderWidth;
 
-- (void)stopIndicatorAnimation;
-- (void)manuallyTriggered;
-
-- (id)initWithImage:(UIImage *)image;
-- (void)setSize:(CGSize) size;
-
-// On iOS 7, progressTintColor sets and gets the tintColor property, and therefore defaults to the value of tintColor
-// On iOS 6, defaults to [UIColor blackColor]
-//@property (nonatomic, strong) UIColor *progressTintColor;
+- (void)manuallyTriggered; // 手动调用下拉刷新
+- (void)stopAnimating; // 停止动画
 
 @end

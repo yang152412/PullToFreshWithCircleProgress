@@ -10,6 +10,8 @@
 #import <objc/runtime.h>
 static char UIScrollViewPullToRefreshView;
 
+static CGFloat const SVPullToRefreshViewHeight = 60;
+
 @implementation UITableView (CircularProgressPullToRefresh)
 @dynamic pullToRefreshView, showPullToRefresh;
 
@@ -17,22 +19,22 @@ static char UIScrollViewPullToRefreshView;
 {
     if(self.pullToRefreshView == nil)
     {
-//        UzysRadialProgressActivityIndicator *view = [[UzysRadialProgressActivityIndicator alloc] initWithImage:[UIImage imageNamed:@"centerIcon"]];
-        CircleProgressRefreshView *view = [[CircleProgressRefreshView alloc] initWithImage:nil];
+        UIView *bgView = [[UIView alloc] initWithFrame:self.bounds];
+        bgView.backgroundColor = [UIColor greenColor];
+        [self setBackgroundView:bgView];
+        
+        CircleProgressRefreshView *view = [[CircleProgressRefreshView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, SVPullToRefreshViewHeight)];
         view.pullToRefreshHandler = handler;
         view.scrollView = self;
-        view.frame = CGRectMake((self.bounds.size.width - view.bounds.size.width)/2-50,10, view.bounds.size.width, view.bounds.size.height);
+        view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+//        view.frame = CGRectMake((self.bounds.size.width - view.bounds.size.width)/2-50,10, view.bounds.size.width, view.bounds.size.height);
         view.originalTopInset = self.contentInset.top;
 //        [self addSubview:view];
 //        [self sendSubviewToBack:view];
         
-        UIView *bgView = [[UIView alloc] initWithFrame:self.bounds];
-        bgView.backgroundColor = [UIColor greenColor];
-        [bgView addSubview:view];
-        
-        [self setBackgroundView:bgView];
         self.pullToRefreshView = view;
         self.showPullToRefresh = YES;
+        [bgView addSubview:view];
         
         // add a line
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.origin.y + PulltoRefreshThreshold, 320, 1)];
@@ -48,7 +50,7 @@ static char UIScrollViewPullToRefreshView;
 }
 - (void)stopRefreshAnimation
 {
-    [self.pullToRefreshView stopIndicatorAnimation];
+    [self.pullToRefreshView stopAnimating];
 }
 #pragma mark - property
 - (void)setPullToRefreshView:(CircleProgressRefreshView *)pullToRefreshView

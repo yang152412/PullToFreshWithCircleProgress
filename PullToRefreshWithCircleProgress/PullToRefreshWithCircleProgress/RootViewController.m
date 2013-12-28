@@ -150,7 +150,7 @@
 {
     if([[self.pData objectAtIndex:indexPath.row] isKindOfClass:[NSString class]] && [[self.pData objectAtIndex:indexPath.row] isEqualToString:@"0"])
     {
-        [self.tableView.pullToRefreshView setSize:CGSizeMake(40, 40)];
+//        [self.tableView.pullToRefreshView setSize:CGSizeMake(40, 40)];
     }
     else if([[self.pData objectAtIndex:indexPath.row] isKindOfClass:[NSString class]] && [[self.pData objectAtIndex:indexPath.row] isEqualToString:@"1"])
     {
@@ -158,7 +158,7 @@
     }
     else if([[self.pData objectAtIndex:indexPath.row] isKindOfClass:[NSString class]] && [[self.pData objectAtIndex:indexPath.row] isEqualToString:@"2"])
     {
-        [self.tableView.pullToRefreshView setImageIcon:[UIImage imageNamed:@"thunderbird"]];
+//        [self.tableView.pullToRefreshView setImageIcon:[UIImage imageNamed:@"thunderbird"]];
     }
     else if([[self.pData objectAtIndex:indexPath.row] isKindOfClass:[NSString class]] && [[self.pData objectAtIndex:indexPath.row] isEqualToString:@"3"])
     {

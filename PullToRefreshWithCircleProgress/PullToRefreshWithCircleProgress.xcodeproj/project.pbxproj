@@ -24,6 +24,7 @@
 		AC084FCE186AB4CE00193390 /* centerIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC084FC9186AB4CE00193390 /* centerIcon@2x.png */; };
 		AC084FCF186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FCB186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.m */; };
 		AC084FD0186AB4CE00193390 /* CircleProgressRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC084FCD186AB4CE00193390 /* CircleProgressRefreshView.m */; };
+		AC1BAB3B186D1FE20068E34A /* EVCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1BAB3A186D1FE20068E34A /* EVCircularProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		AC084FCB186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CircularProgressPullToRefresh.m"; sourceTree = "<group>"; };
 		AC084FCC186AB4CE00193390 /* CircleProgressRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressRefreshView.h; sourceTree = "<group>"; };
 		AC084FCD186AB4CE00193390 /* CircleProgressRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressRefreshView.m; sourceTree = "<group>"; };
+		AC1BAB39186D1FE20068E34A /* EVCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVCircularProgressView.h; sourceTree = "<group>"; };
+		AC1BAB3A186D1FE20068E34A /* EVCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVCircularProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,8 @@
 				AC084FCB186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.m */,
 				AC084FCC186AB4CE00193390 /* CircleProgressRefreshView.h */,
 				AC084FCD186AB4CE00193390 /* CircleProgressRefreshView.m */,
+				AC1BAB39186D1FE20068E34A /* EVCircularProgressView.h */,
+				AC1BAB3A186D1FE20068E34A /* EVCircularProgressView.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 				AC084FA1186AB40000193390 /* main.m in Sources */,
 				AC084FCF186AB4CE00193390 /* UITableView+CircularProgressPullToRefresh.m in Sources */,
 				AC084FC6186AB46700193390 /* RootViewController.m in Sources */,
+				AC1BAB3B186D1FE20068E34A /* EVCircularProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
