@@ -128,12 +128,12 @@
     if (progress > 0) {
         BOOL startingFromIndeterminateState = [self.shapeLayer animationForKey:@"indeterminateAnimation"] != nil;
         
-        [self stopIndeterminateAnimation];
+//        [self stopIndeterminateAnimation];
         
         self.shapeLayer.lineWidth = self.progressWidth;
         
         self.shapeLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
-                                                              radius:self.bounds.size.width/2 - 1
+                                                              radius:self.bounds.size.width/2
                                                           startAngle:DEGREES_TO_RADIANS(-70)
                                                             endAngle:DEGREES_TO_RADIANS(-90)
                                                            clockwise:YES].CGPath;
@@ -156,7 +156,7 @@
         // If progress is zero, then add the indeterminate animation
         [self.shapeLayer removeAnimationForKey:@"animation"];
         
-        [self startIndeterminateAnimation];
+//        [self startIndeterminateAnimation];
     }
 }
 
@@ -205,6 +205,8 @@
 
 - (void)startIndeterminateAnimation
 {
+    [self.shapeLayer removeAnimationForKey:@"animation"];
+    
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
     
@@ -212,7 +214,7 @@
     
     self.shapeLayer.lineWidth = self.progressWidth;
     self.shapeLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
-                                                          radius:self.bounds.size.width/2 - 1
+                                                          radius:self.bounds.size.width/2
                                                       startAngle:DEGREES_TO_RADIANS(-70)
                                                         endAngle:DEGREES_TO_RADIANS(-90)
                                                        clockwise:YES].CGPath;

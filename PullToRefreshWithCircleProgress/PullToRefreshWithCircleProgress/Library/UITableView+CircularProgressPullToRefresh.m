@@ -10,8 +10,6 @@
 #import <objc/runtime.h>
 static char UIScrollViewPullToRefreshView;
 
-static CGFloat const SVPullToRefreshViewHeight = 60;
-
 @implementation UITableView (CircularProgressPullToRefresh)
 @dynamic pullToRefreshView, showPullToRefresh;
 
@@ -23,7 +21,7 @@ static CGFloat const SVPullToRefreshViewHeight = 60;
         bgView.backgroundColor = [UIColor greenColor];
         [self setBackgroundView:bgView];
         
-        CircleProgressRefreshView *view = [[CircleProgressRefreshView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, SVPullToRefreshViewHeight)];
+        CircleProgressRefreshView *view = [[CircleProgressRefreshView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, PulltoRefreshThreshold)];
         view.pullToRefreshHandler = handler;
         view.scrollView = self;
         view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
@@ -55,9 +53,9 @@ static CGFloat const SVPullToRefreshViewHeight = 60;
 #pragma mark - property
 - (void)setPullToRefreshView:(CircleProgressRefreshView *)pullToRefreshView
 {
-    [self willChangeValueForKey:@"UzysRadialProgressActivityIndicator"];
+    [self willChangeValueForKey:@"CircleProgressRefreshView"];
     objc_setAssociatedObject(self, &UIScrollViewPullToRefreshView, pullToRefreshView, OBJC_ASSOCIATION_ASSIGN);
-    [self didChangeValueForKey:@"UzysRadialProgressActivityIndicator"];
+    [self didChangeValueForKey:@"CircleProgressRefreshView"];
 }
 - (CircleProgressRefreshView *)pullToRefreshView
 {

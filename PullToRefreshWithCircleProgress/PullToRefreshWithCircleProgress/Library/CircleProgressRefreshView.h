@@ -13,13 +13,10 @@
 
 typedef void (^actionHandler)(void);
 typedef NS_ENUM(NSUInteger, PullToRefreshState) {
-//    PullToRefreshStateNone =0,
-//    PullToRefreshStateStopped,
     PullToRefreshStateNormal, // 正常情况
     PullToRefreshStateTriggering, // offset 没有达到阈值
     PullToRefreshStateTriggered, // offset 达到阈值
     PullToRefreshStateLoading, // 正在加载中
-    
 };
 
 
