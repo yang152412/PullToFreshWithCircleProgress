@@ -13,4 +13,8 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+#define DDLogSTART()  NSLog(@"<<< %s",__PRETTY_FUNCTION__);
+#define DDLogEND()   NSLog(@">>> %s",__PRETTY_FUNCTION__);
+
 #endif

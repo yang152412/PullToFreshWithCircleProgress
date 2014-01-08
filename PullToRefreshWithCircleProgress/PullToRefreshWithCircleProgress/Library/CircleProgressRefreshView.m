@@ -122,9 +122,6 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-//    self.shapeLayer.frame = _activityIndicatorFrame;
-//    [self updatePath];
-    
     switch (self.state) {
         case PullToRefreshStateNormal:
             [self stopIndeterminateAnimation];
@@ -150,9 +147,11 @@
 #pragma mark - ScrollViewInset
 - (void)setScrollViewContentInsetForLoadingIndicator:(actionHandler)handler
 {
-    CGFloat offset = MAX(self.scrollView.contentOffset.y * -1, 0);
+//    CGFloat offset = MAX(self.scrollView.contentOffset.y * -1, 0);
     UIEdgeInsets currentInsets = self.scrollView.contentInset;
-    currentInsets.top = MIN(offset, self.originalTopInset + self.bounds.size.height + _activityIndicatorFrame.origin.y);
+//    currentInsets.top = MIN(offset, self.originalTopInset + self.bounds.size.height + _activityIndicatorFrame.origin.y);
+    currentInsets.top = self.originalTopInset + PulltoRefreshThreshold;
+    NSLog(@" \n currentInsets.top == %g ",currentInsets.top);
     [self setScrollViewContentInset:currentInsets handler:handler];
 }
 - (void)resetScrollViewContentInset:(actionHandler)handler
@@ -245,22 +244,8 @@
 }
 - (void)scrollViewDidScroll:(CGPoint)contentOffset
 {
-//    static double prevProgress;
     CGFloat yOffset = contentOffset.y;
-    NSLog(@" \n yOffset ==  %g, self.originalTopInset==%g",yOffset,self.originalTopInset);
-    if (yOffset >= 0) { // 向上滑
-        self.progress = 0;
-    }
-    else if (-yOffset <= self.activityIndicatorView.frame.origin.y) {
-        self.progress = 0;
-    }
-    else if (-yOffset <= self.originalTopInset) {
-        self.progress = 0;
-    }else if (fabs((-yOffset+ self.originalTopInset)) >= PulltoRefreshThreshold){
-        self.progress = 1;
-    }else {
-        self.progress = (fabs(-yOffset+ self.originalTopInset - self.activityIndicatorView.frame.origin.y)/(PulltoRefreshThreshold - self.activityIndicatorView.frame.origin.y));
-    }
+    NSLog(@" \n yOffset ==  %g",yOffset);
     
     if (self.state == PullToRefreshStateLoading) {
         CGFloat offset;
@@ -271,6 +256,21 @@
         self.scrollView.contentInset = UIEdgeInsetsMake(offset, contentInset.left, contentInset.bottom, contentInset.right);
     }
     else {
+        if (yOffset >= 0) { // 向上滑
+            self.progress = 0;
+        }
+        else if (-yOffset <= self.activityIndicatorView.frame.origin.y) {
+            self.progress = 0;
+        }
+        else if (-yOffset <= self.originalTopInset) {
+            self.progress = 0;
+        }else if (fabs((-yOffset+ self.originalTopInset)) >= PulltoRefreshThreshold){
+            self.progress = 1;
+        }else {
+            self.progress = (fabs(-yOffset+ self.originalTopInset - self.activityIndicatorView.frame.origin.y)/(PulltoRefreshThreshold - self.activityIndicatorView.frame.origin.y));
+            NSLog(@"\n yOffset == %g \n,self.porgress == %g",yOffset,self.progress);
+        }
+        
         // 向下滑动，offset.y < 0;
 //        CGFloat offsetY = contentOffset.y * -1.0;
 //        CGFloat scrollOffsetThreshold = self.frame.origin.y - self.originalTopInset;
@@ -324,6 +324,7 @@
     
     if(_state == newState)
         return;
+    NSLog(@" setState: %d ",newState);
     
     PullToRefreshState previousState = _state;
     _state = newState;
@@ -349,50 +350,14 @@
 }
 
 #pragma mark - 进度条
-- (void)updatePath {
-    CGPoint center = CGPointMake(CGRectGetMidX(_activityIndicatorFrame),
-                                 CGRectGetMidY(_activityIndicatorFrame));
-    
-    CGFloat radius = _activityIndicatorFrame.size.width/2 - self.borderWidth;
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithArcCenter:center
-                                                              radius:radius
-                                                          startAngle:DEGREES_TO_RADIANS(-80)
-                                                            endAngle:DEGREES_TO_RADIANS(-90)
-                                                           clockwise:YES];
-    
-    self.shapeLayer.path = bezierPath.CGPath;
-}
 - (void)setProgress:(double)progress
 {
-    NSLog(@" \n progress == %g \n ",progress);
-    
-    static double prevProgress;
-    
+    NSLog(@" \n porgress == %g \n ",progress);
     if(progress > 1.0)
     {
         progress = 1.0;
     }
-    if (progress >= 0 && progress <=1.0 && self.state != PullToRefreshStateLoading && self.state != PullToRefreshStateNormal) {
-        
-        //strokeAnimation
-//        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-//        animation.fromValue = [NSNumber numberWithFloat:((CAShapeLayer *)self.shapeLayer.presentationLayer).strokeEnd];
-//        animation.toValue = [NSNumber numberWithFloat:progress];
-//        animation.duration = 0.35 + 0.25*(fabs([animation.fromValue doubleValue] - [animation.toValue doubleValue]));
-//        animation.removedOnCompletion = NO;
-//        animation.fillMode = kCAFillModeBoth;
-//        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-//        [self.shapeLayer addAnimation:animation forKey:@"animation"];
-//        NSLog(@" \n animation.fromValue == %@ animation.toValue == %@ \n ",animation.fromValue,animation.toValue);
-        
-//        float pro = progress + ((CAShapeLayer *)self.shapeLayer.presentationLayer).strokeEnd;
-//        self.activityIndicatorView.hidden = NO;
-//        [self.activityIndicatorView setProgress:self.progress animated:YES];
-    }
     _progress = progress;
-    prevProgress = progress;
-    
-//    self.activityIndicatorView.hidden = NO;
     [self.activityIndicatorView setProgress:self.progress animated:NO];
 }
 
@@ -401,13 +366,11 @@
 - (void)startIndeterminateAnimation
 {
     [self.activityIndicatorView startIndeterminateAnimation];
-//    self.activityIndicatorView.hidden = NO;
 }
 
 - (void)stopIndeterminateAnimation
 {
     [self.activityIndicatorView stopIndeterminateAnimation];
-//    self.activityIndicatorView.hidden = YES;
 }
 
 @end
