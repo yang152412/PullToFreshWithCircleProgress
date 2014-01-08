@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "EVCircularProgressView.h"
 
-#define PulltoRefreshThreshold 60.0
+#define PulltoRefreshThreshold 67.0
 
 typedef void (^actionHandler)(void);
 typedef NS_ENUM(NSUInteger, PullToRefreshState) {

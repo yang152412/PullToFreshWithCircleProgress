@@ -12,7 +12,7 @@
 #define DEGREES_TO_RADIANS(x) (x)/180.0*M_PI
 #define RADIANS_TO_DEGREES(x) (x)/M_PI*180.0
 
-#define ActivityIndicatorDefaultSize CGSizeMake(28, 28)
+//#define ActivityIndicatorDefaultSize CGSizeMake(28, 28)
 
 #define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
 #define fequalzero(a) (fabs(a) < FLT_EPSILON)
@@ -62,30 +62,30 @@
     
     self.subtitles = [NSMutableArray arrayWithObjects:[[NSDate date] description], @"", @"", @"", nil];
     
-    self.textColor = [UIColor darkGrayColor];
+    self.textColor = [UIColor darkTextColor];
     // label
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
     [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     _dateFormatter.locale = [NSLocale currentLocale];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 15, 180, 20)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 19, 180, 20)];
     _titleLabel.text = NSLocalizedString(@"Pull to refresh...",);
     _titleLabel.font = [UIFont boldSystemFontOfSize:14];
     _titleLabel.backgroundColor = [UIColor whiteColor];
     _titleLabel.textColor = self.textColor;
     [self addSubview:_titleLabel];
     
-    _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 38, 180, 20)];
+    _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 39, 180, 20)];
     _subtitleLabel.font = [UIFont systemFontOfSize:12];
     _subtitleLabel.backgroundColor = [UIColor lightGrayColor];
-    _subtitleLabel.textColor = self.textColor;
+    _subtitleLabel.textColor = [UIColor lightTextColor];
     [self addSubview:_subtitleLabel];
     
     self.wasTriggeredByUser = YES;
     
     // 转圈 frame
-    _activityIndicatorFrame = CGRectMake(100, 20, 20, 20);
+    _activityIndicatorFrame = CGRectMake(100, 19, 16, 16);
     
     // red color
     self.borderColor = [UIColor colorWithRed:203/255.0 green:32/255.0 blue:39/255.0 alpha:1];
@@ -152,7 +152,7 @@
 {
     CGFloat offset = MAX(self.scrollView.contentOffset.y * -1, 0);
     UIEdgeInsets currentInsets = self.scrollView.contentInset;
-    currentInsets.top = MIN(offset, self.originalTopInset + self.bounds.size.height + 20.0);
+    currentInsets.top = MIN(offset, self.originalTopInset + self.bounds.size.height + _activityIndicatorFrame.origin.y);
     [self setScrollViewContentInset:currentInsets handler:handler];
 }
 - (void)resetScrollViewContentInset:(actionHandler)handler
@@ -303,7 +303,7 @@
 - (void)startAnimating{
     
     if(fequalzero(self.scrollView.contentOffset.y)) {
-        [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x, -self.frame.size.height) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x, -(self.frame.size.height+self.frame.origin.y)) animated:YES];
         self.wasTriggeredByUser = NO;
     }
     else {

@@ -25,7 +25,6 @@ static char UIScrollViewPullToRefreshView;
         view.pullToRefreshHandler = handler;
         view.scrollView = self;
         view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
-//        view.frame = CGRectMake((self.bounds.size.width - view.bounds.size.width)/2-50,10, view.bounds.size.width, view.bounds.size.height);
         view.originalTopInset = self.contentInset.top;
 //        [self addSubview:view];
 //        [self sendSubviewToBack:view];

@@ -64,7 +64,7 @@
 
 - (instancetype)init
 {
-    self = [super initWithFrame:CGRectMake(0, 0, 28, 28)];
+    self = [super initWithFrame:CGRectMake(0, 0, 16, 16)];
     
     if (self) {
         [self commonInit];
