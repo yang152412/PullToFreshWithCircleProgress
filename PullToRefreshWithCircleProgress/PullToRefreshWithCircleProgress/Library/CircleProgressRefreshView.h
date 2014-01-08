@@ -33,6 +33,8 @@ typedef NS_ENUM(NSUInteger, PullToRefreshState) {
 @property (nonatomic,strong) UIColor *borderColor;
 @property (nonatomic,assign) CGFloat borderWidth;
 
+@property (nonatomic, strong) NSDate *lastUpdatedDate;
+
 - (void)manuallyTriggered; // 手动调用下拉刷新
 - (void)stopAnimating; // 停止动画
 

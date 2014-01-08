@@ -16,4 +16,5 @@
 - (void)addPullToRefreshActionHandler:(actionHandler)handler;
 - (void)triggerPullToRefresh;
 - (void)stopRefreshAnimation;
+
 @end

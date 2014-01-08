@@ -48,6 +48,7 @@ static char UIScrollViewPullToRefreshView;
 - (void)stopRefreshAnimation
 {
     [self.pullToRefreshView stopAnimating];
+    self.pullToRefreshView.lastUpdatedDate = [NSDate date];
 }
 #pragma mark - property
 - (void)setPullToRefreshView:(CircleProgressRefreshView *)pullToRefreshView

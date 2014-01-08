@@ -34,7 +34,6 @@
 @property (nonatomic, strong) NSMutableArray *titles;
 //@property (nonatomic, strong) NSMutableArray *subtitles;
 
-@property (nonatomic, strong) NSDate *lastUpdatedDate;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 @property (nonatomic, assign) BOOL wasTriggeredByUser;
@@ -55,16 +54,18 @@
 - (void)_commonInit
 {
     self.titles = [NSMutableArray arrayWithObjects:NSLocalizedString(@"下拉刷新...",),
-                   NSLocalizedString(@"释放立即刷新...",),
+                   NSLocalizedString(@"下拉刷新...",),
                    NSLocalizedString(@"释放立即刷新...",),
                    NSLocalizedString(@"正在刷新...",),
                    nil];
     // label [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss:SSS"];
     _dateFormatter = [[NSDateFormatter alloc] init];
-    [_dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [_dateFormatter setDateFormat:@"yyyy-MM-dd"];
 //    [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
 //    [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     _dateFormatter.locale = [NSLocale currentLocale];
+    
+    self.lastUpdatedDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"CircleProgressRefreshView_LastRefresh"];
     
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(132, 17, 180, 17)];
     _titleLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -120,7 +121,6 @@
     [super layoutSubviews];
     switch (self.state) {
         case PullToRefreshStateNormal:
-            [self setLastUpdatedDate:[NSDate date]];
             [self stopIndeterminateAnimation];
             break;
         case PullToRefreshStateTriggered:
@@ -134,6 +134,7 @@
     
     // 更新 title
     self.titleLabel.text = [self.titles objectAtIndex:self.state];
+    self.subtitleLabel.text = [self subtitleFromLastUpdateDate];
 }
 
 #pragma mark - ScrollViewInset
@@ -195,7 +196,12 @@
     if (_lastUpdatedDate != newLastUpdatedDate) {
         _lastUpdatedDate = newLastUpdatedDate;
     }
-    self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"上次刷新: %@",), newLastUpdatedDate?[self.dateFormatter stringFromDate:newLastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
+//    self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"上次刷新: %@",), newLastUpdatedDate?[self.dateFormatter stringFromDate:newLastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
+    
+    self.subtitleLabel.text = [self subtitleFromLastUpdateDate];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_lastUpdatedDate forKey:@"CircleProgressRefreshView_LastRefresh"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setDateFormatter:(NSDateFormatter *)newDateFormatter {
@@ -203,7 +209,26 @@
     self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"上次刷新: %@",), self.lastUpdatedDate?[newDateFormatter stringFromDate:self.lastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
 }
 
-- (NSString *)lastUpdateDate {
+// 上次更新时间和当前时间进行对比，可以显示 刚刚，3分钟前... 等。
+- (NSString *)subtitleFromLastUpdateDate{
+    NSTimeInterval lastTime = [self.lastUpdatedDate timeIntervalSince1970];
+    
+    NSDate *current = [NSDate date];
+    NSTimeInterval currentTime = [current timeIntervalSince1970];
+    
+    NSTimeInterval buff = currentTime - lastTime;
+    NSLog(@" \n current:%g, last:%g, 差值：%g \n",currentTime,lastTime,buff);
+    if (buff < 60.0) {
+        return @"刚刚";
+    } else {
+        int m = buff/60;
+        if (m <= 30) {
+            return [NSString stringWithFormat:@"%d分钟前",m+1];
+        } else {
+            // 超过30分钟，显示 时间
+            return [NSString stringWithFormat:NSLocalizedString(@"上次刷新: %@",), self.lastUpdatedDate?[self.dateFormatter stringFromDate:self.lastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
+        }
+    }
     return nil;
 }
 
@@ -226,7 +251,7 @@
 - (void)scrollViewDidScroll:(CGPoint)contentOffset
 {
     CGFloat yOffset = contentOffset.y;
-    NSLog(@" \n yOffset ==  %g",yOffset);
+//    NSLog(@" \n yOffset ==  %g",yOffset);
     
     if (self.state == PullToRefreshStateLoading) {
         CGFloat offset;
@@ -253,18 +278,25 @@
         }
         
         // 向下滑动，offset.y < 0;
-//        CGFloat offsetY = contentOffset.y * -1.0;
-//        CGFloat scrollOffsetThreshold = self.frame.origin.y - self.originalTopInset;
         CGFloat scrollOffsetThreshold = -PulltoRefreshThreshold;
-        if (!self.scrollView.isDragging && self.state == PullToRefreshStateTriggered) {
+        if(self.scrollView.isDragging && contentOffset.y >= scrollOffsetThreshold)
+        {
+            self.state = PullToRefreshStateTriggering;
+        }
+        else if (!self.scrollView.isDragging && self.state == PullToRefreshStateTriggered) {
             // 松开手指，已经达到 offset阈值，开始loading
             self.state = PullToRefreshStateLoading;
         }
-        else if(contentOffset.y < scrollOffsetThreshold && self.scrollView.isDragging && self.state == PullToRefreshStateNormal)
+        else if(contentOffset.y < scrollOffsetThreshold && self.scrollView.isDragging && self.state == PullToRefreshStateTriggering)
         {
             // offset，已经达到阈值，但是还在dragging，
             self.state = PullToRefreshStateTriggered;
         }
+//        else if(contentOffset.y < scrollOffsetThreshold && self.scrollView.isDragging && self.state == PullToRefreshStateNormal)
+//        {
+//            // offset，已经达到阈值，但是还在dragging，
+//            self.state = PullToRefreshStateTriggered;
+//        }
         else if (contentOffset.y >= scrollOffsetThreshold && self.state != PullToRefreshStateNormal) {
             // offset 没有达到阈值，
             self.state = PullToRefreshStateNormal;
@@ -304,7 +336,7 @@
 #pragma mark - 进度条
 - (void)setProgress:(double)progress
 {
-    NSLog(@" \n porgress == %g \n ",progress);
+//    NSLog(@" \n porgress == %g \n ",progress);
     if(progress > 1.0)
     {
         progress = 1.0;
