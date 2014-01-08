@@ -120,6 +120,7 @@
     [super layoutSubviews];
     switch (self.state) {
         case PullToRefreshStateNormal:
+            [self setLastUpdatedDate:[NSDate date]];
             [self stopIndeterminateAnimation];
             break;
         case PullToRefreshStateTriggered:
@@ -133,8 +134,6 @@
     
     // 更新 title
     self.titleLabel.text = [self.titles objectAtIndex:self.state];
-    [self setLastUpdatedDate:[NSDate date]];
-//    self.subtitleLabel.text = [[NSDate date] description];
 }
 
 #pragma mark - ScrollViewInset
@@ -202,6 +201,10 @@
 - (void)setDateFormatter:(NSDateFormatter *)newDateFormatter {
 	_dateFormatter = newDateFormatter;
     self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"上次刷新: %@",), self.lastUpdatedDate?[newDateFormatter stringFromDate:self.lastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
+}
+
+- (NSString *)lastUpdateDate {
+    return nil;
 }
 
 #pragma mark - KVO
