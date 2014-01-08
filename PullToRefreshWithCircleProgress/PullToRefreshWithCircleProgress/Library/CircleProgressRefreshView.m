@@ -32,8 +32,8 @@
 @property (nonatomic, strong, readwrite) UILabel *titleLabel;
 @property (nonatomic, strong, readwrite) UILabel *subtitleLabel;
 @property (nonatomic, strong) NSMutableArray *titles;
-@property (nonatomic, strong) NSMutableArray *subtitles;
-@property (nonatomic, strong) UIColor *textColor;
+//@property (nonatomic, strong) NSMutableArray *subtitles;
+
 @property (nonatomic, strong) NSDate *lastUpdatedDate;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
@@ -59,38 +59,34 @@
                    NSLocalizedString(@"Release to refresh...",),
                    NSLocalizedString(@"Loading...",),
                    nil];
-    
-    self.subtitles = [NSMutableArray arrayWithObjects:[[NSDate date] description], @"", @"", @"", nil];
-    
-    self.textColor = [UIColor darkTextColor];
-    // label
+    // label [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss:SSS"];
     _dateFormatter = [[NSDateFormatter alloc] init];
-    [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    [_dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+//    [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
+//    [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     _dateFormatter.locale = [NSLocale currentLocale];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 19, 180, 20)];
-    _titleLabel.text = NSLocalizedString(@"Pull to refresh...",);
-    _titleLabel.font = [UIFont boldSystemFontOfSize:14];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(132, 17, 180, 17)];
+    _titleLabel.font = [UIFont boldSystemFontOfSize:15];
     _titleLabel.backgroundColor = [UIColor whiteColor];
-    _titleLabel.textColor = self.textColor;
+    _titleLabel.textColor = [UIColor darkTextColor];
     [self addSubview:_titleLabel];
     
-    _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 39, 180, 20)];
+    _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(132, 35, 180, 30)];
     _subtitleLabel.font = [UIFont systemFontOfSize:12];
     _subtitleLabel.backgroundColor = [UIColor lightGrayColor];
     _subtitleLabel.textColor = [UIColor lightTextColor];
+    _subtitleLabel.numberOfLines = 0;
     [self addSubview:_subtitleLabel];
     
     self.wasTriggeredByUser = YES;
     
     // 转圈 frame
-    _activityIndicatorFrame = CGRectMake(100, 19, 16, 16);
+    _activityIndicatorFrame = CGRectMake(108, 19, 16, 16);
     
     // red color
     self.borderColor = [UIColor colorWithRed:203/255.0 green:32/255.0 blue:39/255.0 alpha:1];
     self.borderWidth = 1.0f;
-//    self.contentMode = UIViewContentModeRedraw;
     self.state = PullToRefreshStateNormal;
     
     EVCircularProgressView *activity = [[EVCircularProgressView alloc] initWithFrame:_activityIndicatorFrame];
@@ -137,11 +133,8 @@
     
     // 更新 title
     self.titleLabel.text = [self.titles objectAtIndex:self.state];
-    
-//    NSString *subtitle = [self.subtitles objectAtIndex:self.state];
-//    self.subtitleLabel.text = subtitle.length > 0 ? subtitle : nil;
-    
-    self.subtitleLabel.text = [[NSDate date] description];
+    [self setLastUpdatedDate:[NSDate date]];
+//    self.subtitleLabel.text = [[NSDate date] description];
 }
 
 #pragma mark - ScrollViewInset
@@ -187,12 +180,6 @@
     _shapeLayer.strokeColor = _borderColor.CGColor;
 }
 
-- (void)setTextColor:(UIColor *)newTextColor {
-    _textColor = newTextColor;
-    self.titleLabel.textColor = newTextColor;
-	self.subtitleLabel.textColor = newTextColor;
-}
-
 - (void)setTitle:(NSString *)title forState:(PullToRefreshState)state {
     if(!title) {
         title = @"";
@@ -205,19 +192,8 @@
     [self setNeedsLayout];
 }
 
-- (void)setSubtitle:(NSString *)subtitle forState:(PullToRefreshState)state {
-    if(!subtitle) {
-        subtitle = @"";
-    }
-//    if(state == PullToRefreshStateAll)
-//        [self.subtitles replaceObjectsInRange:NSMakeRange(0, 3) withObjectsFromArray:@[subtitle, subtitle, subtitle]];
-//    else
-        [self.subtitles replaceObjectAtIndex:state withObject:subtitle];
-    
-    [self setNeedsLayout];
-}
-
 - (void)setLastUpdatedDate:(NSDate *)newLastUpdatedDate {
+    self.subtitleLabel.numberOfLines = 0;
     self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Last Updated: %@",), newLastUpdatedDate?[self.dateFormatter stringFromDate:newLastUpdatedDate]:NSLocalizedString(@"Never",)];
 }
 

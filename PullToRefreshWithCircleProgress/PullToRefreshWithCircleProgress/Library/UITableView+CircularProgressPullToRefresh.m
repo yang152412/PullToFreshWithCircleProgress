@@ -24,7 +24,7 @@ static char UIScrollViewPullToRefreshView;
         CircleProgressRefreshView *view = [[CircleProgressRefreshView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, PulltoRefreshThreshold)];
         view.pullToRefreshHandler = handler;
         view.scrollView = self;
-        view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+        view.backgroundColor = [UIColor whiteColor];
         view.originalTopInset = self.contentInset.top;
 //        [self addSubview:view];
 //        [self sendSubviewToBack:view];
@@ -34,10 +34,10 @@ static char UIScrollViewPullToRefreshView;
         [bgView addSubview:view];
         
         // add a line
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.origin.y + PulltoRefreshThreshold, 320, 1)];
-        line.backgroundColor = [UIColor yellowColor];
-        [bgView addSubview:line];
-        [bgView sendSubviewToBack:line];
+//        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.origin.y + PulltoRefreshThreshold, 320, 1)];
+//        line.backgroundColor = [UIColor yellowColor];
+//        [bgView addSubview:line];
+//        [bgView sendSubviewToBack:line];
     }
 }
 
