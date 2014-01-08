@@ -194,12 +194,12 @@
 
 - (void)setLastUpdatedDate:(NSDate *)newLastUpdatedDate {
     self.subtitleLabel.numberOfLines = 0;
-    self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"上次刷新时间: %@",), newLastUpdatedDate?[self.dateFormatter stringFromDate:newLastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
+    self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"上次刷新: %@",), newLastUpdatedDate?[self.dateFormatter stringFromDate:newLastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
 }
 
 - (void)setDateFormatter:(NSDateFormatter *)newDateFormatter {
 	_dateFormatter = newDateFormatter;
-    self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"上次刷新时间: %@",), self.lastUpdatedDate?[newDateFormatter stringFromDate:self.lastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
+    self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"上次刷新: %@",), self.lastUpdatedDate?[newDateFormatter stringFromDate:self.lastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
 }
 
 #pragma mark - KVO
