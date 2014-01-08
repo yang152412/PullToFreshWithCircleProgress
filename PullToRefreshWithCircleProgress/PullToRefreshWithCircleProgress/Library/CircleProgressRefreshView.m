@@ -54,10 +54,10 @@
 
 - (void)_commonInit
 {
-    self.titles = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Pull to refresh...",),
-                   NSLocalizedString(@"Release to refresh...",),
-                   NSLocalizedString(@"Release to refresh...",),
-                   NSLocalizedString(@"Loading...",),
+    self.titles = [NSMutableArray arrayWithObjects:NSLocalizedString(@"下拉刷新...",),
+                   NSLocalizedString(@"释放立即刷新...",),
+                   NSLocalizedString(@"释放立即刷新...",),
+                   NSLocalizedString(@"正在刷新...",),
                    nil];
     // label [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss:SSS"];
     _dateFormatter = [[NSDateFormatter alloc] init];
@@ -194,12 +194,12 @@
 
 - (void)setLastUpdatedDate:(NSDate *)newLastUpdatedDate {
     self.subtitleLabel.numberOfLines = 0;
-    self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Last Updated: %@",), newLastUpdatedDate?[self.dateFormatter stringFromDate:newLastUpdatedDate]:NSLocalizedString(@"Never",)];
+    self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"上次刷新时间: %@",), newLastUpdatedDate?[self.dateFormatter stringFromDate:newLastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
 }
 
 - (void)setDateFormatter:(NSDateFormatter *)newDateFormatter {
 	_dateFormatter = newDateFormatter;
-    self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Last Updated: %@",), self.lastUpdatedDate?[newDateFormatter stringFromDate:self.lastUpdatedDate]:NSLocalizedString(@"Never",)];
+    self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"上次刷新时间: %@",), self.lastUpdatedDate?[newDateFormatter stringFromDate:self.lastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
 }
 
 #pragma mark - KVO
