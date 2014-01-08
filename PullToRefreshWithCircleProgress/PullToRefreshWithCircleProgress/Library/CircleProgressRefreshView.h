@@ -10,6 +10,7 @@
 #import "EVCircularProgressView.h"
 
 #define PulltoRefreshThreshold 67.0
+#define kUpdateDateKey @"CircleProgressRefreshView_LastRefresh"
 
 typedef void (^actionHandler)(void);
 typedef NS_ENUM(NSUInteger, PullToRefreshState) {
@@ -34,6 +35,10 @@ typedef NS_ENUM(NSUInteger, PullToRefreshState) {
 @property (nonatomic,assign) CGFloat borderWidth;
 
 @property (nonatomic, strong) NSDate *lastUpdatedDate;
+@property (nonatomic, readonly) NSString *updateDateKey; // 存储时间的key，存放在NSUserDefaults。
+
+
+- (id)initWithFrame:(CGRect)frame updateDateKey:(NSString *)updateDateKey;
 
 - (void)manuallyTriggered; // 手动调用下拉刷新
 - (void)stopAnimating; // 停止动画

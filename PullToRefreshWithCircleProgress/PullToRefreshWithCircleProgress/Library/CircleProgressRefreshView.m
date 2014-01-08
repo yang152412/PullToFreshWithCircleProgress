@@ -46,6 +46,21 @@
     self = [super initWithFrame:frame];
     if(self) {
         // default styling values
+        _updateDateKey = kUpdateDateKey;
+        [self _commonInit];
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame updateDateKey:(NSString *)updateDateKey{
+    self = [super initWithFrame:frame];
+    if(self) {
+        // default styling values
+        if (updateDateKey) {
+            _updateDateKey = updateDateKey;
+        } else {
+            _updateDateKey = kUpdateDateKey;
+        }
         [self _commonInit];
     }
     return self;
@@ -65,7 +80,7 @@
 //    [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     _dateFormatter.locale = [NSLocale currentLocale];
     
-    self.lastUpdatedDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"CircleProgressRefreshView_LastRefresh"];
+    self.lastUpdatedDate = [[NSUserDefaults standardUserDefaults] objectForKey:_updateDateKey];
     
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(132, 17, 180, 17)];
     _titleLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -200,7 +215,7 @@
     
     self.subtitleLabel.text = [self subtitleFromLastUpdateDate];
     
-    [[NSUserDefaults standardUserDefaults] setObject:_lastUpdatedDate forKey:@"CircleProgressRefreshView_LastRefresh"];
+    [[NSUserDefaults standardUserDefaults] setObject:_lastUpdatedDate forKey:_updateDateKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -281,6 +296,7 @@
         CGFloat scrollOffsetThreshold = -PulltoRefreshThreshold;
         if(self.scrollView.isDragging && contentOffset.y >= scrollOffsetThreshold)
         {
+            // 正在滑动，但是没有达到阈值
             self.state = PullToRefreshStateTriggering;
         }
         else if (!self.scrollView.isDragging && self.state == PullToRefreshStateTriggered) {

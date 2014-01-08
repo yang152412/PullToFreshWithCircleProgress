@@ -14,6 +14,7 @@
 @property (nonatomic,strong,readonly) CircleProgressRefreshView *pullToRefreshView;
 
 - (void)addPullToRefreshActionHandler:(actionHandler)handler;
+- (void)addPullToRefreshWithUpdateDateKey:(NSString *)updateDateKey actionHandler:(actionHandler)handler;
 - (void)triggerPullToRefresh;
 - (void)stopRefreshAnimation;
 

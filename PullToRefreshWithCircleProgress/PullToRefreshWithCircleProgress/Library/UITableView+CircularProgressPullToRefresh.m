@@ -15,30 +15,35 @@ static char UIScrollViewPullToRefreshView;
 
 - (void)addPullToRefreshActionHandler:(actionHandler)handler
 {
+    [self addPullToRefreshWithUpdateDateKey:nil actionHandler:handler];
+}
+
+- (void)addPullToRefreshWithUpdateDateKey:(NSString *)updateDateKey actionHandler:(actionHandler)handler {
     if(self.pullToRefreshView == nil)
     {
         UIView *bgView = [[UIView alloc] initWithFrame:self.bounds];
         bgView.backgroundColor = [UIColor greenColor];
         [self setBackgroundView:bgView];
         
-        CircleProgressRefreshView *view = [[CircleProgressRefreshView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, PulltoRefreshThreshold)];
+        CircleProgressRefreshView *view = [[CircleProgressRefreshView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, PulltoRefreshThreshold) updateDateKey:updateDateKey];
         view.pullToRefreshHandler = handler;
         view.scrollView = self;
         view.backgroundColor = [UIColor whiteColor];
         view.originalTopInset = self.contentInset.top;
-//        [self addSubview:view];
-//        [self sendSubviewToBack:view];
+        //        [self addSubview:view];
+        //        [self sendSubviewToBack:view];
         
         self.pullToRefreshView = view;
         self.showPullToRefresh = YES;
         [bgView addSubview:view];
         
         // add a line
-//        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.origin.y + PulltoRefreshThreshold, 320, 1)];
-//        line.backgroundColor = [UIColor yellowColor];
-//        [bgView addSubview:line];
-//        [bgView sendSubviewToBack:line];
+        //        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.origin.y + PulltoRefreshThreshold, 320, 1)];
+        //        line.backgroundColor = [UIColor yellowColor];
+        //        [bgView addSubview:line];
+        //        [bgView sendSubviewToBack:line];
     }
+
 }
 
 - (void)triggerPullToRefresh
