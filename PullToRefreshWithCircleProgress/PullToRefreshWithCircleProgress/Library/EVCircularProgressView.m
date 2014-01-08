@@ -134,7 +134,7 @@
         
         self.shapeLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
                                                               radius:self.bounds.size.width/2
-                                                          startAngle:DEGREES_TO_RADIANS(-70)
+                                                          startAngle:DEGREES_TO_RADIANS(-62)
                                                             endAngle:DEGREES_TO_RADIANS(-90)
                                                            clockwise:YES].CGPath;
         
@@ -215,7 +215,7 @@
     self.shapeLayer.lineWidth = self.progressWidth;
     self.shapeLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
                                                           radius:self.bounds.size.width/2
-                                                      startAngle:DEGREES_TO_RADIANS(-70)
+                                                      startAngle:DEGREES_TO_RADIANS(-62)
                                                         endAngle:DEGREES_TO_RADIANS(-90)
                                                        clockwise:YES].CGPath;
     self.shapeLayer.strokeEnd = 1.0;
