@@ -35,9 +35,11 @@
     // Do any additional setup after loading the view from its nib.
     [self setupDataSource];
     self.view.backgroundColor = [UIColor lightGrayColor];
-    self.title = @"UzysCircularProgressPullToRefresh";
+    self.title = @"CircularProgressPullToRefresh";
     if ([[UIDevice currentDevice] systemVersion].floatValue >= 7.0) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20+44, self.view.bounds.size.width, self.view.bounds.size.height - 20-44) style:UITableViewStylePlain];
+        NSLog(@" %@ ",NSStringFromUIEdgeInsets(self.tableView.contentInset));
     } else {
         self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     }
@@ -50,10 +52,13 @@
     __weak typeof(self) weakSelf =self;
     
     //Because of self.automaticallyAdjustsScrollViewInsets you must add code below in viewWillApper
-    [_tableView addPullToRefreshActionHandler:^{
+//    [_tableView addPullToRefreshActionHandler:^{
+//        [weakSelf insertRowAtTop];
+//    }];
+    
+    [_tableView addPullToRefreshWithUpdateDateKey:@"RootViewController" actionHandler:^{
         [weakSelf insertRowAtTop];
     }];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,7 +71,7 @@
 {
     [super viewDidAppear:animated];
     //manually triggered pulltorefresh
-    [_tableView triggerPullToRefresh];
+//    [_tableView triggerPullToRefresh];
 }
 
 #pragma mark UITableView DataManagement

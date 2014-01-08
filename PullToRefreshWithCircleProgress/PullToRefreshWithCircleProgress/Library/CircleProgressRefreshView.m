@@ -103,7 +103,6 @@
     // red color
     self.borderColor = [UIColor colorWithRed:203/255.0 green:32/255.0 blue:39/255.0 alpha:1];
     self.borderWidth = 1.0f;
-    self.state = PullToRefreshStateNormal;
     
     EVCircularProgressView *activity = [[EVCircularProgressView alloc] initWithFrame:_activityIndicatorFrame];
     activity.progressTintColor = self.borderColor;
