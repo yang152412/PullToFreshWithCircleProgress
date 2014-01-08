@@ -193,7 +193,9 @@
 }
 
 - (void)setLastUpdatedDate:(NSDate *)newLastUpdatedDate {
-    self.subtitleLabel.numberOfLines = 0;
+    if (_lastUpdatedDate != newLastUpdatedDate) {
+        _lastUpdatedDate = newLastUpdatedDate;
+    }
     self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"上次刷新: %@",), newLastUpdatedDate?[self.dateFormatter stringFromDate:newLastUpdatedDate]:NSLocalizedString(@"从未刷新",)];
 }
 
@@ -265,37 +267,8 @@
             self.state = PullToRefreshStateNormal;
         }
     }
-    
 }
-
-#pragma mark - public method
-
-- (void)manuallyTriggered
-{
-    self.state = PullToRefreshStateTriggered;
-    [self startAnimating];
-}
-
-- (void)startAnimating{
-    
-    if(fequalzero(self.scrollView.contentOffset.y)) {
-        [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x, -(self.frame.size.height+self.frame.origin.y)) animated:YES];
-        self.wasTriggeredByUser = NO;
-    }
-    else {
-        self.wasTriggeredByUser = YES;
-    }
-    self.state = PullToRefreshStateLoading;
-}
-
-- (void)stopAnimating {
-    self.state = PullToRefreshStateNormal;
-    
-    if(!self.wasTriggeredByUser) {
-        [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x, -self.originalTopInset) animated:YES];
-    }
-}
-
+#pragma mark - 设置 状态
 - (void)setState:(PullToRefreshState)newState {
     
     if(_state == newState)
@@ -337,8 +310,33 @@
     [self.activityIndicatorView setProgress:self.progress animated:NO];
 }
 
-#pragma mark - Other methods
+#pragma mark - 手动下拉刷新
+- (void)manuallyTriggered
+{
+    self.state = PullToRefreshStateTriggered;
+    [self startAnimating];
+}
 
+- (void)startAnimating{
+    
+    if(fequalzero(self.scrollView.contentOffset.y)) {
+        [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x, -(self.frame.size.height+self.frame.origin.y)) animated:YES];
+        self.wasTriggeredByUser = NO;
+    }
+    else {
+        self.wasTriggeredByUser = YES;
+    }
+    self.state = PullToRefreshStateLoading;
+}
+
+- (void)stopAnimating {
+    self.state = PullToRefreshStateNormal;
+    
+    if(!self.wasTriggeredByUser) {
+        [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x, -self.originalTopInset) animated:YES];
+    }
+}
+#pragma mark - 旋转动画
 - (void)startIndeterminateAnimation
 {
     [self.activityIndicatorView startIndeterminateAnimation];
